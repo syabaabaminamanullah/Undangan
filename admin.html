@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard & Editor Undangan Digital</title>
+  
+  <link rel="icon" type="image/svg+xml" href="assets/images/wax-seal.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Cormorant+Garamond:ital,wght@0,600;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <style>
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background-color: #F8FAF9;
+    }
+    .font-serif {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+    }
+    .font-royal {
+      font-family: 'Cinzel', serif;
+    }
+  </style>
+</head>
+<body class="text-stone-800 antialiased min-h-screen flex flex-col">
+
+  <!-- TOP HEADER -->
+  <header class="bg-[#1A281E] text-white border-b border-[#D4AF37]/30 sticky top-0 z-50 shadow-md">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 py-4 flex flex-wrap items-center justify-between gap-4">
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-full bg-[#D4AF37]/20 border border-[#D4AF37] flex items-center justify-center">
+          <img src="assets/images/wax-seal.svg" alt="Seal" class="w-7 h-7">
+        </div>
+        <div>
+          <h1 class="font-serif italic text-xl font-bold text-[#FFF5D0] leading-none">Editor Undangan Digital</h1>
+          <p class="text-xs text-stone-300 mt-1">Ubah data undangan dengan mudah tanpa menyentuh kode</p>
+        </div>
+      </div>
+
+      <div class="flex items-center gap-2.5">
+        <a href="index.html" target="_blank" class="px-4 py-2 rounded-xl bg-stone-700/80 hover:bg-stone-600 text-white text-xs font-medium flex items-center gap-1.5 transition">
+          <i data-lucide="external-link" class="w-4 h-4"></i>
+          <span>Lihat Undangan</span>
+        </a>
+        <button id="btn-save-all" class="px-5 py-2 rounded-xl bg-gradient-to-r from-[#D4AF37] to-[#B88A2E] text-[#1A281E] font-semibold text-xs flex items-center gap-1.5 shadow-lg shadow-[#D4AF37]/20 hover:brightness-105 transition">
+          <i data-lucide="save" class="w-4 h-4"></i>
+          <span>Simpan Perubahan</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- TOAST NOTIFICATION -->
+  <div id="admin-toast" class="fixed top-20 right-6 z-50 bg-[#1A281E] text-[#FFF5D0] border border-[#D4AF37] px-5 py-3 rounded-2xl shadow-2xl flex items-center gap-2 text-sm transform translate-y-[-100px] opacity-0 transition-all duration-300 pointer-events-none">
+    <i data-lucide="check-circle" class="w-5 h-5 text-[#D4AF37]"></i>
+    <span id="admin-toast-text">Data berhasil disimpan!</span>
+  </div>
+
+  <!-- MAIN WORKSPACE -->
+  <main class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 py-8">
+
+    <!-- NAVIGATION TABS -->
+    <div class="flex flex-wrap gap-2 border-b border-stone-200 pb-4 mb-8">
+      <button onclick="switchTab('tab-mempelai')" class="tab-btn active px-4 py-2.5 rounded-xl font-medium text-xs sm:text-sm flex items-center gap-2 bg-[#1A281E] text-[#FFF5D0] transition">
+        <i data-lucide="users" class="w-4 h-4"></i>
+        <span>Profil Mempelai</span>
+      </button>
+      <button onclick="switchTab('tab-acara')" class="tab-btn px-4 py-2.5 rounded-xl font-medium text-xs sm:text-sm flex items-center gap-2 bg-white border border-stone-200 text-stone-600 hover:bg-stone-50 transition">
+        <i data-lucide="calendar" class="w-4 h-4"></i>
+        <span>Jadwal &amp; Lokasi Acara</span>
+      </button>
+      <button onclick="switchTab('tab-rekening')" class="tab-btn px-4 py-2.5 rounded-xl font-medium text-xs sm:text-sm flex items-center gap-2 bg-white border border-stone-200 text-stone-600 hover:bg-stone-50 transition">
+        <i data-lucide="credit-card" class="w-4 h-4"></i>
+        <span>Amplop &amp; Hadiah</span>
+      </button>
+      <button onclick="switchTab('tab-media')" class="tab-btn px-4 py-2.5 rounded-xl font-medium text-xs sm:text-sm flex items-center gap-2 bg-white border border-stone-200 text-stone-600 hover:bg-stone-50 transition">
+        <i data-lucide="music" class="w-4 h-4"></i>
+        <span>Musik &amp; Media</span>
+      </button>
+      <button onclick="switchTab('tab-tamu')" class="tab-btn px-4 py-2.5 rounded-xl font-medium text-xs sm:text-sm flex items-center gap-2 bg-white border border-stone-200 text-stone-600 hover:bg-stone-50 transition">
+        <i data-lucide="message-square" class="w-4 h-4 text-emerald-600"></i>
+        <span>Generator Link Tamu &amp; WhatsApp</span>
+      </button>
+      <button onclick="switchTab('tab-export')" class="tab-btn px-4 py-2.5 rounded-xl font-medium text-xs sm:text-sm flex items-center gap-2 bg-white border border-stone-200 text-stone-600 hover:bg-stone-50 transition">
+        <i data-lucide="download" class="w-4 h-4 text-amber-600"></i>
+        <span>Export / Backup config.js</span>
+      </button>
+    </div>
+
+    <!-- ==========================================
+         TAB 1: MEMPELAI
+         ========================================== -->
+    <div id="tab-mempelai" class="tab-content space-y-8">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        
+        <!-- MEMPELAI PRIA -->
+        <div class="bg-white rounded-2xl p-6 border border-stone-200/80 shadow-sm">
+          <div class="flex items-center gap-2.5 pb-4 border-b border-stone-100 mb-6">
+            <div class="w-8 h-8 rounded-full bg-emerald-100 text-emerald-800 flex items-center justify-center font-bold text-xs">P</div>
+            <h3 class="font-bold text-stone-900 text-base">Data Mempelai Pria</h3>
+          </div>
+
+          <div class="space-y-4 text-xs">
+            <div>
+              <label class="block font-semibold text-stone-700 mb-1">Nama Panggilan</label>
+              <input type="text" id="groom-call" class="w-full px-3.5 py-2.5 rounded-xl border border-stone-300 focus:border-[#D4AF37] outline-none">
+            </div>
+            <div>
+              <label class="block font-semibold text-stone-700 mb-1">Nama Lengkap &amp; Gelar</label>
+              <input type="text" id="groom-full" class="w-full px-3.5 py-2.5 rounded-xl border border-stone-300 focus:border-[#D4AF37] outline-none">
+            </div>
+            <div>
+              <label class="block font-semibold text-stone-700 mb-1">Nama Ayah</label>
+              <input type="text" id="groom-father" class="w-full px-3.5 py-2.5 rounded-xl border border-stone-300 focus:border-[#D4AF37] outline-none">
+            </div>
+            <div>
+              <label class="block font-semibold text-stone-700 mb-1">Nama Ibu</label>
+              <input type="text" id="groom-mother" class="w-full px-3.5 py-2.5 rounded-xl border border-stone-300 focus:border-[#D4AF37] outline-none">
+            </div>
+            <div>
+              <label class="block font-semibold text-stone-700 mb-1">Urutan Kelahiran</label>
+              <input type="text" id="groom-order" placeholder="Contoh: Putra pertama dari" class="w-full px-3.5 py-2.5 rounded-xl border border-stone-300 focus:border-[#D4AF37] outline-none">
+            </div>
+            <div>
+              <label class="block font-semibold text-stone-700 mb-1">Instagram Handle</label>
+              <input type="text" id="groom-ig" placeholder="@username" class="w-full px-3.5 py-2.5 rounded-xl border border-stone-300 focus:border-[#D4AF37] outline-none">
+            </div>
+            <div>
+              <label class="block font-semibold text-stone-700 mb-1">URL Foto Profil</label>
+              <input type="text" id="groom-photo" class="w-full px-3.5 py-2.5 rounded-xl border border-stone-300 focus:border-[#D4AF37] outline-none">
+            </div>
+            <div>
+              <label class="block font-semibold text-stone-700 mb-1">Bio / Kutipan Singkat</label>
+              <textarea id="groom-bio" rows="2" class="w-full px-3.5 py-2.5 rounded-xl border border-stone-300 focus:border-[#D4AF37] outline-none"></textarea>
+            </div>
+          </div>
+        </div>
+
+        <!-- MEMPELAI WANITA -->
+        <div class="bg-white rounded-2xl p-6 border border-stone-200/80 shadow-sm">
+          <div class="flex items-center gap-2.5 pb-4 border-b border-stone-100 mb-6">
+            <div class="w-8 h-8 rounded-full bg-rose-100 text-rose-800 flex items-center justify-center font-bold text-xs">W</div>
+            <h3 class="font-bold text-stone-900 text-base">Data Mempelai Wanita</h3>
+          </div>
+
+          <div class="space-y-4 text-xs">
+            <div>
+              <label class="block font-semibold text-stone-700 mb-1">Nama Panggilan</label>
+              <input type="text" id="bride-call" class="w-full px-3.5 py-2.5 rounded-xl border border-stone-300 focus:border-[#D4AF37] outline-none">
+            </div>
+            <div>
+              <label class="block font-semibold text-stone-700 mb-1">Nama Lengkap &amp; Gelar</label>
+              <input type="text" id="bride-full" class="w-full px-3.5 py-2.5 rounded-xl border border-stone-300 focus:border-[#D4AF37] outline-none">
+            </div>
+            <div>
+              <label class="block font-semibold text-stone-700 mb-1">Nama Ayah</label>
+              <input type="text" id="bride-father" class="w-full px-3.5 py-2.5 rounded-xl border border-stone-300 focus:border-[#D4AF37] outline-none">
+            </div>
+            <div>
+              <label class="block font-semibold text-stone-700 mb-1">Nama Ibu</label>
+              <input type="text" id="bride-mother" class="w-full px-3.5 py-2.5 rounded-xl border border-stone-300 focus:border-[#D4AF37] outline-none">
+            </div>
+            <div>
+              <label class="block font-semibold text-stone-700 mb-1">Urutan Kelahiran</label>
+              <input type="text" id="bride-order" placeholder="Contoh: Putri kedua dari" class="w-full px-3.5 py-2.5 rounded-xl border border-stone-300 focus:border-[#D4AF37] outline-none">
+            </div>
+            <div>
+              <label class="block font-semibold text-stone-700 mb-1">Instagram Handle</label>
+              <input type="text" id="bride-ig" placeholder="@username" class="w-full px-3.5 py-2.5 rounded-xl border border-stone-300 focus:border-[#D4AF37] outline-none">
+            </div>
+            <div>
+              <label class="block font-semibold text-stone-700 mb-1">URL Foto Profil</label>
+              <input type="text" id="bride-photo" class="w-full px-3.5 py-2.5 rounded-xl border border-stone-300 focus:border-[#D4AF37] outline-none">
+            </div>
+            <div>
+              <label class="block font-semibold text-stone-700 mb-1">Bio / Kutipan Singkat</label>
+              <textarea id="bride-bio" rows="2" class="w-full px-3.5 py-2.5 rounded-xl border border-stone-300 focus:border-[#D4AF37] outline-none"></textarea>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+
+    <!-- ==========================================
+         TAB 2: ACARA & LOKASI
+         ========================================== -->
+    <div id="tab-acara" class="tab-content hidden space-y-8">
+      <div class="bg-white rounded-2xl p-6 border border-stone-200/80 shadow-sm">
+        <h3 class="font-bold text-stone-900 text-base mb-1">Tanggal Acara Utama (Countdown Target)</h3>
+        <p class="text-xs text-stone-500 mb-4">Waktu ini menjadi patokan hitung mundur (Hari, Jam, Menit, Detik)</p>
+        <div class="max-w-xs">
+          <input type="datetime-local" id="event-date-target" class="w-full px-3.5 py-2.5 rounded-xl border border-stone-300 focus:border-[#D4AF37] text-xs outline-none">
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        
+        <!-- AKAD NIKAH -->
+        <div class="bg-white rounded-2xl p-6 border border-stone-200/80 shadow-sm">
+          <h3 class="font-bold text-stone-900 text-base pb-3 border-b border-stone-100 mb-4">Jadwal Akad Nikah</h3>
+          <div class="space-y-4 text-xs">
+            <div>
+              <label class="block font-semibold text-stone-700 mb-1">Hari &amp; Tanggal</label>
+              <input type="text" id="akad-date" placeholder="Sabtu, 12 Desember 2026" class="w-full px-3.5 py-2.5 rounded-xl border border-stone-300 focus:border-[#D4AF37] outline-none">
+            </div>
+            <div>
+              <label class="block font-semibold text-stone-700 mb-1">Waktu / Jam</label>
+              <input type="text" id="akad-time" placeholder="08:00 - 10:00 WIB" class="w-full px-3.5 py-2.5 rounded-xl border border-stone-300 focus:border-[#D4AF37] outline-none">
+            </div>
+            <div>
+              <label class="block font-semibold text-stone-700 mb-1">Nama Tempat / Gedung</label>
+              <input type="text" id="akad-venue" class="w-full px-3.5 py-2.5 rounded-xl border border-stone-300 focus:border-[#D4AF37] outline-none">
+            </div>
+            <div>
+              <label class="block font-semibold text-stone-700 mb-1">Alamat Lengkap</label>
+              <textarea id="akad-address" rows="2" class="w-full px-3.5 py-2.5 rounded-xl border border-stone-300 focus:border-[#D4AF37] outline-none"></textarea>
+            </div>
+            <div>
+              <label class="block font-semibold text-stone-700 mb-1">Tautan Google Maps</label>
+              <input type="text" id="akad-maps" placeholder="https://maps.google.com/?q=..." class="w-full px-3.5 py-2.5 rounded-xl border border-stone-300 focus:border-[#D4AF37] outline-none">
+            </div>
+          </div>
+        </div>
+
+        <!-- RESEPSI -->
+        <div class="bg-white rounded-2xl p-6 border border-stone-200/80 shadow-sm">
+          <h3 class="font-bold text-stone-900 text-base pb-3 border-b border-stone-100 mb-4">Jadwal Resepsi Pernikahan</h3>
+          <div class="space-y-4 text-xs">
+            <div>
+              <label class="block font-semibold text-stone-700 mb-1">Hari &amp; Tanggal</label>
+              <input type="text" id="resepsi-date" placeholder="Sabtu, 12 Desember 2026" class="w-full px-3.5 py-2.5 rounded-xl border border-stone-300 focus:border-[#D4AF37] outline-none">
+            </div>
+            <div>
+              <label class="block font-semibold text-stone-700 mb-1">Waktu / Jam</label>
+              <input type="text" id="resepsi-time" placeholder="11:30 - 15:00 WIB" class="w-full px-3.5 py-2.5 rounded-xl border border-stone-300 focus:border-[#D4AF37] outline-none">
+            </div>
+            <div>
+              <label class="block font-semibold text-stone-700 mb-1">Nama Tempat / Gedung</label>
+              <input type="text" id="resepsi-venue" class="w-full px-3.5 py-2.5 rounded-xl border border-stone-300 focus:border-[#D4AF37] outline-none">
+            </div>
+            <div>
+              <label class="block font-semibold text-stone-700 mb-1">Alamat Lengkap</label>
+              <textarea id="resepsi-address" rows="2" class="w-full px-3.5 py-2.5 rounded-xl border border-stone-300 focus:border-[#D4AF37] outline-none"></textarea>
+            </div>
+            <div>
+              <label class="block font-semibold text-stone-700 mb-1">Tautan Google Maps</label>
+              <input type="text" id="resepsi-maps" placeholder="https://maps.google.com/?q=..." class="w-full px-3.5 py-2.5 rounded-xl border border-stone-300 focus:border-[#D4AF37] outline-none">
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+
+    <!-- ==========================================
+         TAB 3: REKENING & HADIAH
+         ========================================== -->
+    <div id="tab-rekening" class="tab-content hidden space-y-8">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        
+        <!-- REKENING 1 -->
+        <div class="bg-white rounded-2xl p-6 border border-stone-200/80 shadow-sm">
+          <h3 class="font-bold text-stone-900 text-base pb-3 border-b border-stone-100 mb-4">Rekening Bank 1</h3>
+          <div class="space-y-4 text-xs">
+            <div>
+              <label class="block font-semibold text-stone-700 mb-1">Nama Bank</label>
+              <input type="text" id="bank1-name" placeholder="BCA / Mandiri / BNI / BRI" class="w-full px-3.5 py-2.5 rounded-xl border border-stone-300 focus:border-[#D4AF37] outline-none">
+            </div>
+            <div>
+              <label class="block font-semibold text-stone-700 mb-1">Nomor Rekening</label>
+              <input type="text" id="bank1-number" class="w-full px-3.5 py-2.5 rounded-xl border border-stone-300 focus:border-[#D4AF37] outline-none">
+            </div>
+            <div>
+              <label class="block font-semibold text-stone-700 mb-1">Nama Pemilik Rekening</label>
+              <input type="text" id="bank1-holder" class="w-full px-3.5 py-2.5 rounded-xl border border-stone-300 focus:border-[#D4AF37] outline-none">
+            </div>
+          </div>
+        </div>
+
+        <!-- REKENING 2 -->
+        <div class="bg-white rounded-2xl p-6 border border-stone-200/80 shadow-sm">
+          <h3 class="font-bold text-stone-900 text-base pb-3 border-b border-stone-100 mb-4">Rekening Bank 2</h3>
+          <div class="space-y-4 text-xs">
+            <div>
+              <label class="block font-semibold text-stone-700 mb-1">Nama Bank</label>
+              <input type="text" id="bank2-name" placeholder="BCA / Mandiri / BNI / BRI" class="w-full px-3.5 py-2.5 rounded-xl border border-stone-300 focus:border-[#D4AF37] outline-none">
+            </div>
+            <div>
+              <label class="block font-semibold text-stone-700 mb-1">Nomor Rekening</label>
+              <input type="text" id="bank2-number" class="w-full px-3.5 py-2.5 rounded-xl border border-stone-300 focus:border-[#D4AF37] outline-none">
+            </div>
+            <div>
+              <label class="block font-semibold text-stone-700 mb-1">Nama Pemilik Rekening</label>
+              <input type="text" id="bank2-holder" class="w-full px-3.5 py-2.5 rounded-xl border border-stone-300 focus:border-[#D4AF37] outline-none">
+            </div>
+          </div>
+        </div>
+
+        <!-- PENGIRIMAN KADO FISIK -->
+        <div class="bg-white rounded-2xl p-6 border border-stone-200/80 shadow-sm md:col-span-2">
+          <h3 class="font-bold text-stone-900 text-base pb-3 border-b border-stone-100 mb-4">Alamat Pengiriman Kado Fisik</h3>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
+            <div>
+              <label class="block font-semibold text-stone-700 mb-1">Nama Penerima</label>
+              <input type="text" id="gift-recipient" class="w-full px-3.5 py-2.5 rounded-xl border border-stone-300 focus:border-[#D4AF37] outline-none">
+            </div>
+            <div>
+              <label class="block font-semibold text-stone-700 mb-1">Nomor Telepon / WhatsApp</label>
+              <input type="text" id="gift-phone" class="w-full px-3.5 py-2.5 rounded-xl border border-stone-300 focus:border-[#D4AF37] outline-none">
+            </div>
+            <div class="md:col-span-2">
+              <label class="block font-semibold text-stone-700 mb-1">Alamat Lengkap Pengiriman</label>
+              <textarea id="gift-address" rows="2" class="w-full px-3.5 py-2.5 rounded-xl border border-stone-300 focus:border-[#D4AF37] outline-none"></textarea>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+
+    <!-- ==========================================
+         TAB 4: MUSIK & MEDIA
+         ========================================== -->
+    <div id="tab-media" class="tab-content hidden space-y-8">
+      <div class="bg-white rounded-2xl p-6 border border-stone-200/80 shadow-sm">
+        <h3 class="font-bold text-stone-900 text-base pb-3 border-b border-stone-100 mb-4">Pengaturan Musik Latar</h3>
+        <div class="space-y-4 text-xs">
+          <div>
+            <label class="block font-semibold text-stone-700 mb-1">Judul Lagu</label>
+            <input type="text" id="music-title" class="w-full px-3.5 py-2.5 rounded-xl border border-stone-300 focus:border-[#D4AF37] outline-none">
+          </div>
+          <div>
+            <label class="block font-semibold text-stone-700 mb-1">Penyanyi / Artis</label>
+            <input type="text" id="music-artist" class="w-full px-3.5 py-2.5 rounded-xl border border-stone-300 focus:border-[#D4AF37] outline-none">
+          </div>
+          <div>
+            <label class="block font-semibold text-stone-700 mb-1">URL Berkas Audio MP3</label>
+            <input type="text" id="music-url" class="w-full px-3.5 py-2.5 rounded-xl border border-stone-300 focus:border-[#D4AF37] outline-none">
+            <p class="text-[11px] text-stone-400 mt-1">Masukkan URL langsung ke berkas .mp3 (bisa dari hosting Anda atau sumber online).</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-white rounded-2xl p-6 border border-stone-200/80 shadow-sm">
+        <h3 class="font-bold text-stone-900 text-base pb-3 border-b border-stone-100 mb-4">Video Teaser YouTube Prewedding</h3>
+        <div class="space-y-4 text-xs">
+          <div>
+            <label class="block font-semibold text-stone-700 mb-1">YouTube Video ID</label>
+            <input type="text" id="video-yt-id" placeholder="Contoh: LXb3EKWsInQ (kode setelah v= atau youtu.be/)" class="w-full px-3.5 py-2.5 rounded-xl border border-stone-300 focus:border-[#D4AF37] outline-none">
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- ==========================================
+         TAB 5: GENERATOR LINK TAMU & WHATSAPP
+         ========================================== -->
+    <div id="tab-tamu" class="tab-content hidden space-y-8">
+      <div class="bg-white rounded-2xl p-6 border border-stone-200/80 shadow-sm">
+        <div class="flex items-center gap-2 pb-3 border-b border-stone-100 mb-4">
+          <i data-lucide="sparkles" class="w-5 h-5 text-emerald-600"></i>
+          <div>
+            <h3 class="font-bold text-stone-900 text-base leading-none">Generator Link Undangan &amp; WhatsApp Tamu Massal</h3>
+            <p class="text-xs text-stone-500 mt-1">Buat puluhan tautan undangan personal untuk WhatsApp dalam sekali klik</p>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-xs">
+          <div>
+            <label class="block font-semibold text-stone-700 mb-1">URL Dasar Website Undangan Anda</label>
+            <input type="text" id="base-url-input" placeholder="https://website-undangan-anda.com" class="w-full px-3.5 py-2.5 rounded-xl border border-stone-300 focus:border-[#D4AF37] outline-none">
+            <p class="text-[11px] text-stone-400 mt-1">Jika belum di-upload online, Anda bisa biarkan default atau gunakan URL domain Anda.</p>
+          </div>
+
+          <div>
+            <label class="block font-semibold text-stone-700 mb-1">Daftar Nama Tamu (Satu baris untuk setiap nama)</label>
+            <textarea id="guest-list-input" rows="5" placeholder="Bpk. Joko Widodo &amp; Ibu&#10;Dian Sastrowardoyo&#10;Keluarga Besar Bpk. Rahmat&#10;Sahabat SMA Alumni 2018" class="w-full px-3.5 py-2.5 rounded-xl border border-stone-300 focus:border-[#D4AF37] outline-none font-mono"></textarea>
+          </div>
+        </div>
+
+        <div class="mt-4 flex justify-end">
+          <button onclick="generateGuestLinks()" class="px-5 py-2.5 rounded-xl bg-emerald-800 hover:bg-emerald-700 text-white font-semibold text-xs flex items-center gap-2 shadow transition">
+            <i data-lucide="wand-2" class="w-4 h-4"></i>
+            <span>Hasilkan Tautan Undangan</span>
+          </button>
+        </div>
+
+        <!-- RESULT LIST -->
+        <div id="guest-results-container" class="mt-8 hidden">
+          <h4 class="font-bold text-stone-900 text-sm mb-3">Hasil Tautan Undangan Siap Kirim:</h4>
+          <div id="guest-links-list" class="space-y-3 max-h-[450px] overflow-y-auto pr-1"></div>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- ==========================================
+         TAB 6: EXPORT / BACKUP CONFIG.JS
+         ========================================== -->
+    <div id="tab-export" class="tab-content hidden space-y-8">
+      <div class="bg-white rounded-2xl p-6 border border-stone-200/80 shadow-sm text-center max-w-xl mx-auto">
+        <div class="w-12 h-12 rounded-full bg-amber-100 text-amber-800 flex items-center justify-center mx-auto mb-3">
+          <i data-lucide="download" class="w-6 h-6"></i>
+        </div>
+        <h3 class="font-bold text-stone-900 text-lg mb-1">Unduh Berkas config.js Baru</h3>
+        <p class="text-xs text-stone-500 mb-6 leading-relaxed">
+          Jika Anda ingin menaruh undangan ini di hosting online (Vercel, Netlify, atau cPanel) secara permanen, Anda dapat mengunduh berkas konfigurasi baru ini dan menggantikan file <code class="bg-stone-100 px-2 py-0.5 rounded text-stone-800">assets/js/config.js</code> di proyek Anda.
+        </p>
+
+        <div class="flex flex-col sm:flex-row items-center justify-center gap-3">
+          <button onclick="downloadConfigFile()" class="w-full sm:w-auto px-6 py-3 rounded-xl bg-gradient-to-r from-[#D4AF37] to-[#B88A2E] text-[#1A281E] font-bold text-xs flex items-center justify-center gap-2 shadow-lg">
+            <i data-lucide="download" class="w-4 h-4"></i>
+            <span>Download config.js</span>
+          </button>
+          <button onclick="resetToDefaultConfig()" class="w-full sm:w-auto px-5 py-3 rounded-xl bg-stone-100 hover:bg-stone-200 text-stone-700 text-xs font-semibold flex items-center justify-center gap-2">
+            <i data-lucide="rotate-ccw" class="w-4 h-4"></i>
+            <span>Kembalikan ke Contoh Asli</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <footer class="bg-white border-t border-stone-200 py-4 text-center text-xs text-stone-400">
+    &copy; 2026 Admin Dashboard Undangan Digital • Ready for Instant Production
+  </footer>
+
+  <!-- SCRIPT ADMIN LOGIC -->
+  <script src="assets/js/config.js"></script>
+  <script>
+    // Tab switching
+    function switchTab(tabId) {
+      document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+      document.querySelectorAll('.tab-btn').forEach(btn => {
+        btn.classList.remove('bg-[#1A281E]', 'text-[#FFF5D0]');
+        btn.classList.add('bg-white', 'text-stone-600');
+      });
+
+      const activeTab = document.getElementById(tabId);
+      if (activeTab) activeTab.classList.remove('hidden');
+
+      const clickedBtn = event.currentTarget;
+      if (clickedBtn) {
+        clickedBtn.classList.remove('bg-white', 'text-stone-600');
+        clickedBtn.classList.add('bg-[#1A281E]', 'text-[#FFF5D0]');
+      }
+    }
+
+    // Load existing config into form
+    function loadConfigIntoForm() {
+      let cfg = window.WEDDING_CONFIG;
+      try {
+        const local = localStorage.getItem("wedding_custom_config");
+        if (local) cfg = JSON.parse(local);
+      } catch (e) {}
+
+      // Groom
+      document.getElementById('groom-call').value = cfg.couple.groom.callName || "";
+      document.getElementById('groom-full').value = cfg.couple.groom.fullName || "";
+      document.getElementById('groom-father').value = cfg.couple.groom.father || "";
+      document.getElementById('groom-mother').value = cfg.couple.groom.mother || "";
+      document.getElementById('groom-order').value = cfg.couple.groom.childOrder || "";
+      document.getElementById('groom-ig').value = cfg.couple.groom.instagramHandle || "";
+      document.getElementById('groom-photo').value = cfg.couple.groom.avatar || "";
+      document.getElementById('groom-bio').value = cfg.couple.groom.bio || "";
+
+      // Bride
+      document.getElementById('bride-call').value = cfg.couple.bride.callName || "";
+      document.getElementById('bride-full').value = cfg.couple.bride.fullName || "";
+      document.getElementById('bride-father').value = cfg.couple.bride.father || "";
+      document.getElementById('bride-mother').value = cfg.couple.bride.mother || "";
+      document.getElementById('bride-order').value = cfg.couple.bride.childOrder || "";
+      document.getElementById('bride-ig').value = cfg.couple.bride.instagramHandle || "";
+      document.getElementById('bride-photo').value = cfg.couple.bride.avatar || "";
+      document.getElementById('bride-bio').value = cfg.couple.bride.bio || "";
+
+      // Events
+      document.getElementById('event-date-target').value = cfg.eventDate || "2026-12-12T08:00";
+      
+      const akad = cfg.events[0] || {};
+      document.getElementById('akad-date').value = akad.dateStr || "";
+      document.getElementById('akad-time').value = akad.timeStr || "";
+      document.getElementById('akad-venue').value = akad.venueName || "";
+      document.getElementById('akad-address').value = akad.venueDetail || "";
+      document.getElementById('akad-maps').value = akad.mapsUrl || "";
+
+      const resepsi = cfg.events[1] || {};
+      document.getElementById('resepsi-date').value = resepsi.dateStr || "";
+      document.getElementById('resepsi-time').value = resepsi.timeStr || "";
+      document.getElementById('resepsi-venue').value = resepsi.venueName || "";
+      document.getElementById('resepsi-address').value = resepsi.venueDetail || "";
+      document.getElementById('resepsi-maps').value = resepsi.mapsUrl || "";
+
+      // Banks
+      const b1 = cfg.gifts.banks[0] || {};
+      document.getElementById('bank1-name').value = b1.bankName || "";
+      document.getElementById('bank1-number').value = b1.accountNumber || "";
+      document.getElementById('bank1-holder').value = b1.accountHolder || "";
+
+      const b2 = cfg.gifts.banks[1] || {};
+      document.getElementById('bank2-name').value = b2.bankName || "";
+      document.getElementById('bank2-number').value = b2.accountNumber || "";
+      document.getElementById('bank2-holder').value = b2.accountHolder || "";
+
+      // Gift Physical
+      document.getElementById('gift-recipient').value = cfg.gifts.physicalGift.recipient || "";
+      document.getElementById('gift-phone').value = cfg.gifts.physicalGift.phone || "";
+      document.getElementById('gift-address').value = cfg.gifts.physicalGift.address || "";
+
+      // Music & Media
+      document.getElementById('music-title').value = cfg.music.title || "";
+      document.getElementById('music-artist').value = cfg.music.artist || "";
+      document.getElementById('music-url').value = cfg.music.url || "";
+      document.getElementById('video-yt-id').value = cfg.videoTeaser.youtubeId || "";
+
+      // Base URL for link generator
+      document.getElementById('base-url-input').value = window.location.origin + window.location.pathname.replace('admin.html', 'index.html');
+    }
+
+    // Save Form back to localStorage
+    function saveConfig() {
+      let cfg = JSON.parse(JSON.stringify(window.WEDDING_CONFIG));
+      try {
+        const local = localStorage.getItem("wedding_custom_config");
+        if (local) cfg = JSON.parse(local);
+      } catch (e) {}
+
+      // Groom
+      cfg.couple.groom.callName = document.getElementById('groom-call').value;
+      cfg.couple.groom.fullName = document.getElementById('groom-full').value;
+      cfg.couple.groom.father = document.getElementById('groom-father').value;
+      cfg.couple.groom.mother = document.getElementById('groom-mother').value;
+      cfg.couple.groom.childOrder = document.getElementById('groom-order').value;
+      cfg.couple.groom.instagramHandle = document.getElementById('groom-ig').value;
+      cfg.couple.groom.avatar = document.getElementById('groom-photo').value;
+      cfg.couple.groom.bio = document.getElementById('groom-bio').value;
+
+      // Bride
+      cfg.couple.bride.callName = document.getElementById('bride-call').value;
+      cfg.couple.bride.fullName = document.getElementById('bride-full').value;
+      cfg.couple.bride.father = document.getElementById('bride-father').value;
+      cfg.couple.bride.mother = document.getElementById('bride-mother').value;
+      cfg.couple.bride.childOrder = document.getElementById('bride-order').value;
+      cfg.couple.bride.instagramHandle = document.getElementById('bride-ig').value;
+      cfg.couple.bride.avatar = document.getElementById('bride-photo').value;
+      cfg.couple.bride.bio = document.getElementById('bride-bio').value;
+
+      cfg.couple.title = `${cfg.couple.groom.callName} & ${cfg.couple.bride.callName}`;
+
+      // Date
+      cfg.eventDate = document.getElementById('event-date-target').value;
+
+      // Events
+      cfg.events[0].dateStr = document.getElementById('akad-date').value;
+      cfg.events[0].timeStr = document.getElementById('akad-time').value;
+      cfg.events[0].venueName = document.getElementById('akad-venue').value;
+      cfg.events[0].venueDetail = document.getElementById('akad-address').value;
+      cfg.events[0].mapsUrl = document.getElementById('akad-maps').value;
+
+      cfg.events[1].dateStr = document.getElementById('resepsi-date').value;
+      cfg.events[1].timeStr = document.getElementById('resepsi-time').value;
+      cfg.events[1].venueName = document.getElementById('resepsi-venue').value;
+      cfg.events[1].venueDetail = document.getElementById('resepsi-address').value;
+      cfg.events[1].mapsUrl = document.getElementById('resepsi-maps').value;
+
+      // Banks
+      cfg.gifts.banks[0].bankName = document.getElementById('bank1-name').value;
+      cfg.gifts.banks[0].accountNumber = document.getElementById('bank1-number').value;
+      cfg.gifts.banks[0].accountHolder = document.getElementById('bank1-holder').value;
+
+      cfg.gifts.banks[1].bankName = document.getElementById('bank2-name').value;
+      cfg.gifts.banks[1].accountNumber = document.getElementById('bank2-number').value;
+      cfg.gifts.banks[1].accountHolder = document.getElementById('bank2-holder').value;
+
+      // Gift Physical
+      cfg.gifts.physicalGift.recipient = document.getElementById('gift-recipient').value;
+      cfg.gifts.physicalGift.phone = document.getElementById('gift-phone').value;
+      cfg.gifts.physicalGift.address = document.getElementById('gift-address').value;
+
+      // Music & Video
+      cfg.music.title = document.getElementById('music-title').value;
+      cfg.music.artist = document.getElementById('music-artist').value;
+      cfg.music.url = document.getElementById('music-url').value;
+      cfg.videoTeaser.youtubeId = document.getElementById('video-yt-id').value;
+
+      // Save to localStorage
+      localStorage.setItem("wedding_custom_config", JSON.stringify(cfg));
+
+      showAdminToast("Perubahan berhasil disimpan! Undangan langsung diperbarui.");
+    }
+
+    document.getElementById('btn-save-all').addEventListener('click', saveConfig);
+
+    // Toast
+    function showAdminToast(msg) {
+      const t = document.getElementById('admin-toast');
+      document.getElementById('admin-toast-text').textContent = msg;
+      t.classList.remove('opacity-0', 'translate-y-[-100px]');
+      setTimeout(() => {
+        t.classList.add('opacity-0', 'translate-y-[-100px]');
+      }, 3500);
+    }
+
+    // Guest Links Generator
+    function generateGuestLinks() {
+      const rawNames = document.getElementById('guest-list-input').value.trim();
+      let baseUrl = document.getElementById('base-url-input').value.trim();
+      if (!baseUrl) baseUrl = "index.html";
+
+      if (!rawNames) {
+        showAdminToast("Mohon masukkan setidaknya satu nama tamu.");
+        return;
+      }
+
+      const names = rawNames.split('\n').map(n => n.trim()).filter(n => n.length > 0);
+      const container = document.getElementById('guest-links-list');
+      container.innerHTML = "";
+
+      let cfg = window.WEDDING_CONFIG;
+      try {
+        const local = localStorage.getItem("wedding_custom_config");
+        if (local) cfg = JSON.parse(local);
+      } catch (e) {}
+
+      const coupleName = cfg.couple.title || "Arya & Anindita";
+
+      names.forEach((name, idx) => {
+        const encodedName = encodeURIComponent(name);
+        const link = baseUrl.includes('?') ? `${baseUrl}&to=${encodedName}` : `${baseUrl}?to=${encodedName}`;
+
+        const waText = `Kepada Yth. *${name}*\n\nTanpa mengurangi rasa hormat, perkenankan kami mengundang Bapak/Ibu/Saudara/i untuk hadir dan memberikan doa restu pada hari bahagia pernikahan kami:\n\n*The Wedding of ${coupleName}*\n\nBerikut tautan undangan digital Anda:\n${link}\n\nMerupakan suatu kehormatan dan kebahagiaan bagi kami apabila Bapak/Ibu/Saudara/i berkenan hadir.\n\nTerima kasih kami ucapkan,\n*${coupleName}*`;
+        const waUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(waText)}`;
+
+        const item = document.createElement('div');
+        item.className = "p-3.5 rounded-xl bg-stone-50 border border-stone-200 flex flex-wrap items-center justify-between gap-3 text-xs";
+        item.innerHTML = `
+          <div class="flex-1 min-w-[200px]">
+            <p class="font-bold text-stone-900">${name}</p>
+            <p class="font-mono text-[11px] text-stone-500 truncate">${link}</p>
+          </div>
+          <div class="flex items-center gap-2">
+            <button onclick="navigator.clipboard.writeText('${link}'); showAdminToast('Link disalin: ${name}')" class="px-3 py-1.5 rounded-lg bg-white border border-stone-300 hover:bg-stone-100 text-stone-700 font-medium flex items-center gap-1 transition">
+              <i data-lucide="copy" class="w-3.5 h-3.5"></i>
+              <span>Salin Link</span>
+            </button>
+            <a href="${waUrl}" target="_blank" class="px-3 py-1.5 rounded-lg bg-emerald-700 hover:bg-emerald-600 text-white font-medium flex items-center gap-1 transition">
+              <i data-lucide="message-circle" class="w-3.5 h-3.5"></i>
+              <span>Kirim WA</span>
+            </a>
+          </div>
+        `;
+        container.appendChild(item);
+      });
+
+      document.getElementById('guest-results-container').classList.remove('hidden');
+      lucide.createIcons();
+      showAdminToast(`Berhasil membuat ${names.length} tautan undangan tamu!`);
+    }
+
+    // Download config.js
+    function downloadConfigFile() {
+      let cfg = JSON.parse(JSON.stringify(window.WEDDING_CONFIG));
+      try {
+        const local = localStorage.getItem("wedding_custom_config");
+        if (local) cfg = JSON.parse(local);
+      } catch (e) {}
+
+      const fileContent = `/**
+ * ====================================================================
+ * KONFIGURASI UTAMA UNDANGAN DIGITAL (NATURAL BOTANICAL LUXURY)
+ * ====================================================================
+ * Berkas ini digenerate secara otomatis dari Admin Dashboard.
+ */
+
+const WEDDING_CONFIG = ${JSON.stringify(cfg, null, 2)};
+
+// Export to window
+window.WEDDING_CONFIG = WEDDING_CONFIG;
+`;
+
+      const blob = new Blob([fileContent], { type: "application/javascript" });
+      const a = document.createElement("a");
+      a.href = URL.createObjectURL(blob);
+      a.download = "config.js";
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      showAdminToast("Berkas config.js berhasil diunduh!");
+    }
+
+    // Reset default
+    function resetToDefaultConfig() {
+      if (confirm("Apakah Anda yakin ingin mengembalikan pengaturan ke data contoh default?")) {
+        localStorage.removeItem("wedding_custom_config");
+        loadConfigIntoForm();
+        showAdminToast("Data dikembalikan ke pengaturan contoh awal.");
+      }
+    }
+
+    // Init
+    loadConfigIntoForm();
+    lucide.createIcons();
+  </script>
+</body>
+</html>

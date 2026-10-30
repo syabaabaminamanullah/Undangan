@@ -1,0 +1,18 @@
+{
+  "name": "undangan-digital-premium",
+  "version": "1.0.0",
+  "description": "Full set undangan digital pernikahan premium, natural botanical luxury, elegan, dan ikonik.",
+  "scripts": {
+    "start": "npx serve -l 3000",
+    "dev": "npx serve -l 3000"
+  },
+  "keywords": [
+    "undangan-digital",
+    "wedding-invitation",
+    "botanical-luxury",
+    "wax-seal",
+    "responsive"
+  ],
+  "author": "Antigravity",
+  "license": "MIT"
+}

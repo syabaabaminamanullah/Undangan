@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 60" width="100%" height="100%" fill="none">
+  <defs>
+    <linearGradient id="divGold" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#D4AF37" stop-opacity="0" />
+      <stop offset="25%" stop-color="#D4AF37" stop-opacity="0.6" />
+      <stop offset="50%" stop-color="#DFBD5A" stop-opacity="1" />
+      <stop offset="75%" stop-color="#D4AF37" stop-opacity="0.6" />
+      <stop offset="100%" stop-color="#D4AF37" stop-opacity="0" />
+    </linearGradient>
+  </defs>
+
+  <!-- Left Line -->
+  <line x1="50" y1="30" x2="200" y2="30" stroke="url(#divGold)" stroke-width="1" />
+  <circle cx="120" cy="30" r="1.5" fill="#D4AF37" opacity="0.6" />
+  
+  <!-- Right Line -->
+  <line x1="300" y1="30" x2="450" y2="30" stroke="url(#divGold)" stroke-width="1" />
+  <circle cx="380" cy="30" r="1.5" fill="#D4AF37" opacity="0.6" />
+
+  <!-- Center Botanical Flower & Leaves -->
+  <g transform="translate(250, 30)">
+    <!-- Center Diamond / Star -->
+    <path d="M 0 -8 L 4 0 L 0 8 L -4 0 Z" fill="#D4AF37" />
+    <circle cx="0" cy="0" r="1.8" fill="#FFF8E7" />
+
+    <!-- Left leaves -->
+    <path d="M -6 -1 Q -15 -8 -22 -3 Q -15 3 -6 1" fill="#4A5D4E" opacity="0.75" />
+    <path d="M -12 2 Q -22 8 -28 3 Q -22 -1 -12 1" fill="#78866B" opacity="0.65" />
+    <circle cx="-32" cy="0" r="2" fill="#D4AF37" />
+
+    <!-- Right leaves -->
+    <path d="M 6 -1 Q 15 -8 22 -3 Q 15 3 6 1" fill="#4A5D4E" opacity="0.75" />
+    <path d="M 12 2 Q 22 8 28 3 Q 22 -1 12 1" fill="#78866B" opacity="0.65" />
+    <circle cx="32" cy="0" r="2" fill="#D4AF37" />
+  </g>
+</svg>
