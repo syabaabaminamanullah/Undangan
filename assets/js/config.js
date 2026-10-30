@@ -228,7 +228,7 @@ const WEDDING_CONFIG = {
         title: "Canon in D",
         artist: "Johann Pachelbel",
         tag: "Wedding Sacred Classic",
-        desc: "Karya agung klasik pernikahan paling sakral dan menyentuh sanubari di seluruh dunia.",
+        desc: "Karya agung klasik pernikahan paling sakral dan legendaris di seluruh dunia (dasar dari melodi Canon Rock).",
         url: "assets/audio/canon-in-d.mp3"
       },
       {
@@ -246,6 +246,46 @@ const WEDDING_CONFIG = {
         tag: "Romantic Serenade",
         desc: "Alunan dawai biola yang tenang, damai, dan penuh kehangatan cinta yang abadi.",
         url: "assets/audio/air-on-g.mp3"
+      },
+      {
+        id: "s4",
+        title: "Ave Maria",
+        artist: "Franz Schubert",
+        tag: "Sacred Blessing Anthem",
+        desc: "Lantunan doa suci yang agung, memohon limpahan rahmat dan keberkahan bagi kedua mempelai.",
+        url: "assets/audio/ave-maria.mp3"
+      },
+      {
+        id: "s5",
+        title: "Liebestraum No. 3 (Mimpi Cinta)",
+        artist: "Franz Liszt",
+        tag: "Romantic Piano Masterpiece",
+        desc: "Komposisi piano romantis termasyhur tentang impian cinta sejati yang tulus dan mendalam.",
+        url: "assets/audio/liebestraum.mp3"
+      },
+      {
+        id: "s6",
+        title: "The Four Seasons: Spring",
+        artist: "Antonio Vivaldi",
+        tag: "Joyful Wedding Celebration",
+        desc: "Alunan ceria penuh suka cita merayakan awal lembaran baru kehidupan rumah tangga.",
+        url: "assets/audio/vivaldi-spring.mp3"
+      },
+      {
+        id: "s7",
+        title: "Für Elise",
+        artist: "Ludwig van Beethoven",
+        tag: "Beloved Classical Romance",
+        desc: "Melodi piano legendaris paling dicintai dengan nuansa manis dan penuh ketulusan hati.",
+        url: "assets/audio/fur-elise.mp3"
+      },
+      {
+        id: "s8",
+        title: "Waltz of the Flowers",
+        artist: "Pyotr Ilyich Tchaikovsky",
+        tag: "Majestic Wedding Waltz",
+        desc: "Tarian waltz megah dan mewah yang mempercantik suasana pesta pernikahan bertema floral.",
+        url: "assets/audio/waltz-of-flowers.mp3"
       }
     ]
   },
