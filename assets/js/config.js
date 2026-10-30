@@ -9,7 +9,7 @@ const WEDDING_CONFIG = {
   meta: {
     title: "The Wedding of Abud & Intan | Undangan Pernikahan",
     description: "Dengan memohon rahmat dan ridho Allah SWT, kami mengundang Anda dalam pernikahan Abdullah Nur Cahya (Abud) & Intan Syintia Nurrannisa (Intan).",
-    canonicalUrl: "https://undangan-six-flax.vercel.app",
+    canonicalUrl: "https://undangan.annsa.site",
     ogImage: "assets/images/foto-berdua.png"
   },
 
