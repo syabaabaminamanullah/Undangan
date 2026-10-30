@@ -36,7 +36,7 @@ const WEDDING_CONFIG = {
       childOrder: "Putri pertama dari",
       instagram: "https://www.instagram.com/intansyintiaintansyintia?mdxt=MTB4bWt5eXR2bzg2ag==",
       instagramHandle: "@intansyintiaintansyintia",
-      avatar: "assets/images/foto-intan-latar-biru.png",
+      avatar: "assets/images/foto-intan-latar-biru.jpeg",
       bio: "Merajut rasa dan asa bersama Abud menuju bahtera rumah tangga yang sakinah, mawaddah, warahmah."
     }
   },
@@ -101,6 +101,11 @@ const WEDDING_CONFIG = {
     note: "Bagi sahabat dan kerabat yang berhalangan hadir secara langsung, silakan ikuti prosesi secara virtual."
   },
 
+  // Pengaturan Tampilan Bagian Halaman (Show / Hide)
+  sections: {
+    story: false // Set false untuk menyembunyikan bagian Kisah Cinta
+  },
+
   // Perjalanan Cinta / Love Story
   stories: [
     {
@@ -136,7 +141,7 @@ const WEDDING_CONFIG = {
       category: "portrait"
     },
     {
-      url: "assets/images/foto-intan-latar-biru.png",
+      url: "assets/images/foto-intan-latar-biru.jpeg",
       caption: "Intan Syintia Nurrannisa (Intan)",
       category: "portrait"
     },

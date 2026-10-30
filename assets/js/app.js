@@ -44,6 +44,11 @@ document.addEventListener("DOMContentLoaded", () => {
           if (BASE_CONFIG.eventDate) {
             config.eventDate = BASE_CONFIG.eventDate;
           }
+          if (saved.sections && typeof saved.sections.story !== 'undefined') {
+            config.sections = saved.sections;
+          } else if (BASE_CONFIG.sections) {
+            config.sections = BASE_CONFIG.sections;
+          }
         }
         window.WEDDING_CONFIG = config;
       }
@@ -221,6 +226,16 @@ document.addEventListener("DOMContentLoaded", () => {
     if (ytFrame && config.videoTeaser && config.videoTeaser.youtubeId) {
       ytFrame.src = `https://www.youtube.com/embed/${config.videoTeaser.youtubeId}?si=botanical`;
     }
+
+    // Sections Show / Hide (Kisah Cinta)
+    const storySection = document.getElementById("story");
+    const storyNavItem = document.querySelector('a[href="#story"]');
+    const isStoryVisible = (config.sections && typeof config.sections.story !== "undefined")
+      ? config.sections.story
+      : (window.WEDDING_CONFIG && window.WEDDING_CONFIG.sections ? window.WEDDING_CONFIG.sections.story : false);
+
+    if (storySection) storySection.style.display = isStoryVisible ? "" : "none";
+    if (storyNavItem) storyNavItem.style.display = isStoryVisible ? "" : "none";
   }
 
   bindConfigToDom();

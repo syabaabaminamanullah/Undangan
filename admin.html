@@ -354,6 +354,24 @@
          TAB 4: MUSIK & MEDIA
          ========================================== -->
     <div id="tab-media" class="tab-content hidden space-y-8">
+      
+      <!-- PENGATURAN TAMPILAN SECTION -->
+      <div class="bg-white rounded-2xl p-6 border border-stone-200/80 shadow-sm">
+        <h3 class="font-bold text-stone-900 text-base pb-3 border-b border-stone-100 mb-4 flex items-center gap-2">
+          <i data-lucide="eye" class="w-5 h-5 text-emerald-600"></i>
+          <span>Pengaturan Tampilan Bagian (Show / Hide Section)</span>
+        </h3>
+        <div class="space-y-3">
+          <label class="flex items-start sm:items-center gap-3 p-3.5 rounded-xl border border-stone-200 bg-stone-50 cursor-pointer hover:bg-amber-50/50 transition">
+            <input type="checkbox" id="toggle-section-story" class="mt-0.5 sm:mt-0 w-4 h-4 text-emerald-700 rounded border-stone-300">
+            <div>
+              <span class="font-bold text-stone-800 text-xs">Tampilkan Bagian "Kisah Cinta" (Love Story Timeline)</span>
+              <p class="text-[11px] text-stone-500 font-light mt-0.5">Hilangkan centang untuk menyembunyikan cerita kisah cinta dari halaman undangan dan menu bawah.</p>
+            </div>
+          </label>
+        </div>
+      </div>
+
       <div class="bg-white rounded-2xl p-6 border border-stone-200/80 shadow-sm">
         <h3 class="font-bold text-stone-900 text-base pb-3 border-b border-stone-100 mb-4">Pengaturan Musik Latar</h3>
         <div class="space-y-4 text-xs">
@@ -647,6 +665,15 @@
       document.getElementById('music-url').value = cfg.music.url || "";
       document.getElementById('video-yt-id').value = cfg.videoTeaser.youtubeId || "";
 
+      // Section Toggles
+      const storyToggle = document.getElementById('toggle-section-story');
+      if (storyToggle) {
+        const isStoryOn = (cfg.sections && typeof cfg.sections.story !== 'undefined')
+          ? cfg.sections.story
+          : ((window.WEDDING_CONFIG && window.WEDDING_CONFIG.sections) ? window.WEDDING_CONFIG.sections.story : false);
+        storyToggle.checked = !!isStoryOn;
+      }
+
       // Base URL for link generator
       document.getElementById('base-url-input').value = window.location.origin + window.location.pathname.replace('admin.html', 'index.html');
     }
@@ -716,6 +743,13 @@
       cfg.music.artist = document.getElementById('music-artist').value;
       cfg.music.url = document.getElementById('music-url').value;
       cfg.videoTeaser.youtubeId = document.getElementById('video-yt-id').value;
+
+      // Sections
+      if (!cfg.sections) cfg.sections = {};
+      const storyToggleEl = document.getElementById('toggle-section-story');
+      if (storyToggleEl) {
+        cfg.sections.story = storyToggleEl.checked;
+      }
 
       // Tag with version so app.js knows this config is compatible
       cfg._version = "2.1";
