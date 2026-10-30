@@ -2,43 +2,42 @@
  * ====================================================================
  * KONFIGURASI UTAMA UNDANGAN DIGITAL (NATURAL BOTANICAL LUXURY)
  * ====================================================================
- * Anda dapat mengubah semua data undangan dengan sangat mudah di file ini.
  */
 
 const WEDDING_CONFIG = {
   // Metadata & SEO
   meta: {
-    title: "The Wedding of Arya & Anindita | Undangan Pernikahan",
-    description: "Dengan memohon rahmat dan ridho Allah SWT, kami bermaksud menyelenggarakan pernikahan kami.",
-    canonicalUrl: "https://arya-anindita.wedding",
+    title: "The Wedding of Abud & Intan | Undangan Pernikahan",
+    description: "Dengan memohon rahmat dan ridho Allah SWT, kami mengundang Anda dalam pernikahan Abdullah Nur Cahya (Abud) & Intan Syintia Nurrannisa (Intan).",
+    canonicalUrl: "https://undangan-six-flax.vercel.app",
     ogImage: "https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1200&q=80"
   },
 
   // Info Pasangan Mempelai
   couple: {
-    title: "Arya & Anindita",
-    initials: "A & A",
+    title: "Abud & Intan",
+    initials: "A & I",
     groom: {
-      callName: "Arya",
-      fullName: "Raden Arya Pratama, S.T., M.Sc.",
-      father: "Bpk. Ir. H. Bambang Sujarwo",
-      mother: "Ibu Hj. Siti Nurhaliza",
-      childOrder: "Putra pertama dari",
-      instagram: "https://instagram.com/aryapratama",
-      instagramHandle: "@aryapratama",
+      callName: "Abud",
+      fullName: "Abdullah Nur Cahya",
+      father: "Bpk. Dargo",
+      mother: "Ibu Nin Karwati",
+      childOrder: "Putra kedua dari",
+      instagram: "https://instagram.com",
+      instagramHandle: "@abud",
       avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=800&q=80",
-      bio: "Pria pecinta alam dan arsitektur yang menemukan rumah sejatinya di dalam senyum Anindita."
+      bio: "Menemukan pelabuhan cinta dan ketenangan hati bersama Intan, melangkah bersama dalam ridho Ilahi."
     },
     bride: {
-      callName: "Anindita",
-      fullName: "dr. Anindita Larasati, Sp.A.",
-      father: "Bpk. Dr. H. Hendra Kusuma, Sp.PD",
-      mother: "Ibu Dra. Hj. Ratna Sari Dewi",
-      childOrder: "Putri kedua dari",
-      instagram: "https://instagram.com/aninditalarasati",
-      instagramHandle: "@aninditalarasati",
+      callName: "Intan",
+      fullName: "Intan Syintia Nurrannisa",
+      father: "Bpk. M. Muhsinul K.",
+      mother: "Ibu Herni Nuraeni",
+      childOrder: "Putri pertama dari",
+      instagram: "https://instagram.com",
+      instagramHandle: "@intan",
       avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=800&q=80",
-      bio: "Dokter anak berhati hangat yang mencintai aroma hujan, sastra, dan tawa tulus Arya."
+      bio: "Merajut rasa dan asa bersama Abud menuju bahtera rumah tangga yang sakinah, mawaddah, warahmah."
     }
   },
 
@@ -51,7 +50,7 @@ const WEDDING_CONFIG = {
 
   // Waktu & Tanggal Acara Utama (untuk Hitung Mundur / Countdown)
   // Format: YYYY-MM-DDTHH:mm:ss
-  eventDate: "2026-12-12T08:00:00",
+  eventDate: "2026-12-14T08:00:00",
 
   // Detail Acara (Akad Nikah & Resepsi)
   events: [
@@ -59,36 +58,36 @@ const WEDDING_CONFIG = {
       id: "akad",
       tag: "SACRED CEREMONY",
       title: "Akad Nikah",
-      dateStr: "Sabtu, 12 Desember 2026",
-      timeStr: "08:00 - 10:00 WIB",
-      venueName: "The Glass House Pavilion - Plataran Borobudur",
-      venueDetail: "Dusun Tanjungan, Borobudur, Magelang, Jawa Tengah",
-      mapsUrl: "https://maps.google.com/?q=Plataran+Heritage+Borobudur",
-      embedMap: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3953.8647898516244!2d110.1989679!3d-7.6005856!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e7a8cf61db1d1ab%3A0x67394d2fa8c13009!2sPlataran%20Heritage%20Borobudur%20Hotel!5e0!3m2!1sid!2sid!4v1700000000000!5m2!1sid!2sid",
+      dateStr: "Senin, 14 Desember 2026",
+      timeStr: "08:00 WIB s/d Selesai",
+      venueName: "Kediaman Mempelai Pria",
+      venueDetail: "Kp. Haurduni RT 03/RW 10, Ds. Pananjung, Kec. Cangkuang, Kab. Bandung",
+      mapsUrl: "https://maps.google.com/?q=Kp.+Haurduni+Pananjung+Cangkuang+Bandung",
+      embedMap: "https://maps.google.com/maps?q=Kp.+Haurduni+Pananjung+Cangkuang+Bandung&t=&z=15&ie=UTF8&iwloc=&output=embed",
       calendar: {
-        title: "The Wedding of Arya & Anindita - Akad Nikah",
-        description: "Menghadiri prosesi Akad Nikah Arya & Anindita di Plataran Borobudur.",
-        location: "Plataran Heritage Borobudur, Magelang",
-        start: "20261212T080000",
-        end: "20261212T100000"
+        title: "The Wedding of Abud & Intan - Akad Nikah",
+        description: "Menghadiri prosesi Akad Nikah Abud & Intan di Kp. Haurduni Pananjung Cangkuang Bandung.",
+        location: "Kp. Haurduni RT 03/RW 10, Ds. Pananjung, Kec. Cangkuang, Kab. Bandung",
+        start: "20261214T080000",
+        end: "20261214T110000"
       }
     },
     {
       id: "resepsi",
       tag: "CELEBRATION OF LOVE",
       title: "Resepsi Pernikahan",
-      dateStr: "Sabtu, 12 Desember 2026",
-      timeStr: "11:30 - 15:00 WIB",
-      venueName: "Grand Pine Garden Ballroom - Plataran Borobudur",
-      venueDetail: "Dusun Tanjungan, Borobudur, Magelang, Jawa Tengah",
-      mapsUrl: "https://maps.google.com/?q=Plataran+Heritage+Borobudur",
-      embedMap: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3953.8647898516244!2d110.1989679!3d-7.6005856!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e7a8cf61db1d1ab%3A0x67394d2fa8c13009!2sPlataran%20Heritage%20Borobudur%20Hotel!5e0!3m2!1sid!2sid!4v1700000000000!5m2!1sid!2sid",
+      dateStr: "Minggu, 20 Desember 2026",
+      timeStr: "08:00 WIB s/d Selesai",
+      venueName: "Kediaman Mempelai Pria",
+      venueDetail: "Kp. Haurduni RT 03/RW 10, Ds. Pananjung, Kec. Cangkuang, Kab. Bandung",
+      mapsUrl: "https://maps.google.com/?q=Kp.+Haurduni+Pananjung+Cangkuang+Bandung",
+      embedMap: "https://maps.google.com/maps?q=Kp.+Haurduni+Pananjung+Cangkuang+Bandung&t=&z=15&ie=UTF8&iwloc=&output=embed",
       calendar: {
-        title: "The Wedding of Arya & Anindita - Resepsi Pernikahan",
-        description: "Merayakan resepsi pernikahan Arya & Anindita di Plataran Borobudur.",
-        location: "Grand Pine Garden, Plataran Borobudur",
-        start: "20261212T113000",
-        end: "20261212T150000"
+        title: "The Wedding of Abud & Intan - Resepsi Pernikahan",
+        description: "Merayakan resepsi pernikahan Abud & Intan di Kp. Haurduni Pananjung Cangkuang Bandung.",
+        location: "Kp. Haurduni RT 03/RW 10, Ds. Pananjung, Kec. Cangkuang, Kab. Bandung",
+        start: "20261220T080000",
+        end: "20261220T170000"
       }
     }
   ],
@@ -105,36 +104,30 @@ const WEDDING_CONFIG = {
   // Perjalanan Cinta / Love Story
   stories: [
     {
-      year: "2021",
-      title: "Pertemuan Pertama di Yogyakarta",
-      story: "Sebuah perjumpaan tak terduga di kedai buku sudut Malioboro di bawah rinai gerimis senja. Berawal dari percakapan hangat tentang karya sastra, kami menyadari ada getaran rasa yang tak biasa.",
+      year: "2022",
+      title: "Pertemuan Pertama",
+      story: "Awal perjumpaan yang penuh rasa syukur. Berawal dari percakapan sederhana, kami menyadari adanya kecocokan hati dan tujuan yang seirama.",
       tag: "First Encounter"
     },
     {
-      year: "2023",
-      title: "Menjalin Janji & Bertumbuh Bersama",
-      story: "Dua hati yang saling belajar, bertumbuh, dan menguatkan di tengah mimpi masing-masing. Jarak dan waktu hanya mempertegas bahwa rumah terbaik adalah ketika kita saling mendengarkan.",
+      year: "2024",
+      title: "Menjalin Janji & Komitmen",
+      story: "Dua hati yang saling belajar, bertumbuh, dan menguatkan di tengah mimpi masing-masing, mengukuhkan tekad untuk melangkah ke jenjang pernikahan.",
       tag: "Growing in Love"
-    },
-    {
-      year: "2025",
-      title: "Momen Sakral Lamaran di Bromo",
-      story: "Di hadapan fajar keemasan Gunung Bromo dengan hembusan angin sejuk, sebuah cincin tersemat dengan janji suci untuk menapaki sisa usia bersama dalam ridho Ilahi.",
-      tag: "The Proposal"
     },
     {
       year: "2026",
       title: "Menuju Gerbang Abadi",
-      story: "Kini, kami mengundang Anda untuk menjadi saksi pengikatan janji suci cinta kami menuju bahtera rumah tangga yang sakinah, mawaddah, warahmah.",
+      story: "Kini, dengan restu kedua orang tua dan memohon ridho Ilahi, kami siap mengikat janji suci pernikahan untuk bersama hingga jannah-Nya.",
       tag: "The Eternal Vow"
     }
   ],
 
-  // Galeri Foto & Prewedding
+  // Galeri Foto & Prewedding (Bisa diisi link foto Anda)
   gallery: [
     {
       url: "https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1000&q=80",
-      caption: "Di Bawah Kanopi Cemara",
+      caption: "Di Bawah Kanopi Alam",
       category: "nature"
     },
     {
@@ -169,7 +162,7 @@ const WEDDING_CONFIG = {
     enabled: true,
     title: "Cinematic Prewedding Film",
     subtitle: "A glimpse of our sacred journey",
-    youtubeId: "LXb3EKWsInQ", // sample ambient nature cinematic video
+    youtubeId: "LXb3EKWsInQ",
     poster: "https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1200&q=80"
   },
 
@@ -196,13 +189,13 @@ const WEDDING_CONFIG = {
       {
         bankName: "Bank Central Asia (BCA)",
         accountNumber: "8735091244",
-        accountHolder: "Raden Arya Pratama",
+        accountHolder: "Abdullah Nur Cahya",
         logo: "https://upload.wikimedia.org/wikipedia/commons/5/5c/Bank_Central_Asia.svg"
       },
       {
-        bankName: "Bank Mandiri",
+        bankName: "Bank Mandiri / BRI",
         accountNumber: "1370018992011",
-        accountHolder: "Anindita Larasati",
+        accountHolder: "Intan Syintia Nurrannisa",
         logo: "https://upload.wikimedia.org/wikipedia/commons/a/ad/Bank_Mandiri_logo_2016.svg"
       }
     ],
@@ -210,14 +203,14 @@ const WEDDING_CONFIG = {
       enabled: true,
       title: "QRIS Pembayaran Digital",
       note: "Dapat dipindai dari GoPay, OVO, Dana, ShopeePay, BCA Mobile, & seluruh Mobile Banking.",
-      imageUrl: "https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=WEDDING-GIFT-ARYA-ANINDITA"
+      imageUrl: "https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=WEDDING-GIFT-ABUD-INTAN"
     },
     physicalGift: {
       enabled: true,
       title: "Kirim Kado Fisik",
-      recipient: "Arya & Anindita (Kediaman Arya)",
+      recipient: "Abud & Intan (Kediaman Mempelai Pria)",
       phone: "+62 812-3456-7890",
-      address: "Jl. Taman Botanical Asri No. 18, Sleman, D.I. Yogyakarta 55281",
+      address: "Kp. Haurduni RT 03/RW 10, Ds. Pananjung, Kec. Cangkuang, Kab. Bandung",
       note: "Konfirmasi pengiriman kado dapat dilakukan via WhatsApp mempelai."
     }
   },
@@ -226,48 +219,65 @@ const WEDDING_CONFIG = {
   music: {
     title: "Until I Found You - Acoustic Fingerstyle",
     artist: "Stephen Sanchez (Instrumental Cover)",
-    // High quality royalty-free romantic guitar streaming audio
     url: "https://assets.mixkit.co/music/preview/mixkit-serene-view-443.mp3",
     autoplayOnOpen: true
   },
+
+  // Keluarga Besar & Turut Mengundang
+  families: [
+    "Bpk. Dargo & Ibu Nin Karwati",
+    "Bpk. Eman & Ibu Acah",
+    "Bpk. Alex & Ibu Herni Nuraeni",
+    "Bpk. M. Muhsinul & Ibu Tarmilah",
+    "Bpk. Yahya & Ibu Popon"
+  ],
+
+  turutMengundang: [
+    "Hj. Iis Sutiarsih (Kepala Desa Pananjung)",
+    "Kel. Besar PDP Galura Asih",
+    "Kel. Besar Sri Rahayu Ubay SR",
+    "Kel. Besar Yans Bajing Production",
+    "Karang Taruna Pananjung X",
+    "Hazats Adventure",
+    "Kel. Besar Riweuh Mom Dinda Firtiany / Dikingo",
+    "Kel. Besar Bunda Yani (Yani YDR Collection)",
+    "Bpk. Tatang Encis & Ibu Eulis Dedeh (Ketua RW 10)",
+    "Bpk. Soni & Ibu Siti",
+    "Bpk. Agus Bohlam & Ibu Winda",
+    "Bpk. Jaja & Ibu Sumarni",
+    "Bpk. Diki & Ibu Danti",
+    "Bpk. Ferdi & Ibu Putri",
+    "Bpk. Jaka & Ibu Ema"
+  ],
 
   // Default Ucapan Awal di Buku Tamu
   initialWishes: [
     {
       id: "w1",
-      name: "Prof. Dr. Ir. H. Suryo Prabowo",
+      name: "Hj. Iis Sutiarsih (Kades Pananjung)",
       attendance: "hadir",
       pax: 2,
-      time: "10 menit yang lalu",
-      message: "Barakallahu lakuma wa baraka 'alaikuma wa jama'a bainakuma fii khoir. Selamat menempuh hidup baru untuk ananda Arya dan Anindita. Semoga menjadi keluarga sakinah, mawaddah, warahmah.",
-      likes: 12
+      time: "Baru saja",
+      message: "Barakallahu lakuma wa baraka 'alaikuma wa jama'a bainakuma fii khoir. Selamat menempuh hidup baru untuk ananda Abud dan Intan. Semoga menjadi keluarga yang sakinah, mawaddah, warahmah.",
+      likes: 15
     },
     {
       id: "w2",
-      name: "dr. Michelle Valerie & Suami",
+      name: "Kel. Besar PDP Galura Asih",
       attendance: "hadir",
-      pax: 2,
+      pax: 5,
       time: "1 jam yang lalu",
-      message: "Happy wedding dokter Anindita dan Mas Arya! Masya Allah serasi banget. Semoga bahagia selalu sampai maut memisahkan yaa, can't wait to see you on your special day!",
-      likes: 8
+      message: "Selamat berbahagia kang Abud dan teh Intan! Semoga dilancarkan acaranya sampai hari H dan selalu diberkahi kebahagiaan.",
+      likes: 9
     },
     {
       id: "w3",
-      name: "Dimas Anggara & Rekan Arsitek",
+      name: "Karang Taruna Pananjung X",
       attendance: "hadir",
-      pax: 3,
+      pax: 4,
       time: "2 jam yang lalu",
-      message: "Selamat brader Arya! Akhirnya pelabuhan terakhir ditemukan juga. Semoga lancar acaranya sampai hari H, bahagia dunia akhirat bro!",
-      likes: 5
-    },
-    {
-      id: "w4",
-      name: "Sarah Amanda, S.Kom.",
-      attendance: "ragu",
-      pax: 1,
-      time: "Kemarin",
-      message: "Selamat yaa Anindita & Mas Arya! Doa terbaik untuk kalian berdua. Semoga dilancarkan semua persiapannya yaa cantikk.",
-      likes: 3
+      message: "Wilujeng ngambah sagara rumah tangga kanggo Kang Abud & Teh Intan. Samawa salalamina!",
+      likes: 7
     }
   ],
 

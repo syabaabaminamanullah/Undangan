@@ -78,11 +78,11 @@
           text-anchor="middle" 
           letter-spacing="2"
           filter="url(#emboss)">
-      A &amp; A
+      A &amp; I
     </text>
 
     <!-- Tiny Star at bottom -->
-    <text x="100" y="128" font-size="9" fill="url(#goldRim)" text-anchor="middle" opacity="0.8">✦ 12.12.26 ✦</text>
+    <text x="100" y="128" font-size="9" fill="url(#goldRim)" text-anchor="middle" opacity="0.8">✦ 14.12.26 ✦</text>
 
     <!-- Realistic Highlight Reflection -->
     <path d="M 45 45 C 65 25, 95 20, 125 25 C 105 28, 75 35, 55 52 C 48 58, 42 68, 38 78 C 36 65, 38 52, 45 45 Z" 
