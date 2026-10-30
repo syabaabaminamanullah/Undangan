@@ -41,6 +41,9 @@ document.addEventListener("DOMContentLoaded", () => {
           if (BASE_CONFIG.videoTeaser) {
             config.videoTeaser = BASE_CONFIG.videoTeaser;
           }
+          if (BASE_CONFIG.eventDate) {
+            config.eventDate = BASE_CONFIG.eventDate;
+          }
         }
         window.WEDDING_CONFIG = config;
       }
@@ -137,7 +140,9 @@ document.addEventListener("DOMContentLoaded", () => {
       const elVenue = document.querySelector(".dyn-resepsi-venue");
       const elAddr = document.querySelector(".dyn-resepsi-address");
       const elMaps = document.querySelector(".dyn-resepsi-maps");
+      const heroDate = document.querySelector(".dyn-hero-date");
       if (elDate) elDate.textContent = resepsi.dateStr;
+      if (heroDate) heroDate.textContent = resepsi.dateStr;
       if (elTime) elTime.textContent = resepsi.timeStr;
       if (elVenue) elVenue.textContent = resepsi.venueName;
       if (elAddr) elAddr.textContent = resepsi.venueDetail;

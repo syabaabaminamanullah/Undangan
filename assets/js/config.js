@@ -48,9 +48,9 @@ const WEDDING_CONFIG = {
     source: "QS. Ar-Rum: 21"
   },
 
-  // Waktu & Tanggal Acara Utama (untuk Hitung Mundur / Countdown)
+  // Waktu & Tanggal Acara Utama (untuk Hitung Mundur / Countdown Resepsi)
   // Format: YYYY-MM-DDTHH:mm:ss
-  eventDate: "2026-12-14T08:00:00",
+  eventDate: "2026-12-20T08:00:00",
 
   // Detail Acara (Akad Nikah & Resepsi)
   events: [
