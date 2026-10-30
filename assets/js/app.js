@@ -6,15 +6,51 @@
 
 document.addEventListener("DOMContentLoaded", () => {
   // Check for custom config saved from visual admin dashboard
-  let config = window.WEDDING_CONFIG;
+  // Base config (from config.js file) is the source of truth for media & songs
+  const BASE_CONFIG = window.WEDDING_CONFIG;
+  const CONFIG_VERSION = "2.1"; // bump when breaking changes occur
+
+  let config = BASE_CONFIG;
   try {
     const customConfig = localStorage.getItem("wedding_custom_config");
     if (customConfig) {
-      config = JSON.parse(customConfig);
-      window.WEDDING_CONFIG = config;
+      const saved = JSON.parse(customConfig);
+
+      // If saved config is from an old version, discard it to avoid stale data
+      if (!saved._version || saved._version !== CONFIG_VERSION) {
+        console.info("Config version mismatch — clearing stale localStorage config.");
+        localStorage.removeItem("wedding_custom_config");
+      } else {
+        config = saved;
+        // Always pull images & songs from the base config (file-served assets)
+        // so that newly committed photos are always reflected
+        if (BASE_CONFIG) {
+          config.couple.groom.avatar = BASE_CONFIG.couple.groom.avatar;
+          config.couple.bride.avatar = BASE_CONFIG.couple.bride.avatar;
+          config.gallery = BASE_CONFIG.gallery;
+          config.meta.ogImage = BASE_CONFIG.meta.ogImage;
+          if (BASE_CONFIG.music && BASE_CONFIG.music.popularWeddingSongs) {
+            if (!config.music) config.music = {};
+            config.music.popularWeddingSongs = BASE_CONFIG.music.popularWeddingSongs;
+          }
+          if (BASE_CONFIG.videoTeaser) {
+            config.videoTeaser = BASE_CONFIG.videoTeaser;
+          }
+        }
+        window.WEDDING_CONFIG = config;
+      }
     }
   } catch (e) {
     console.warn("Could not load custom config from localStorage", e);
+    config = BASE_CONFIG;
+  }
+
+  // Always ensure popularWeddingSongs is available (fallback to base)
+  if (BASE_CONFIG && BASE_CONFIG.music && BASE_CONFIG.music.popularWeddingSongs) {
+    if (!config.music) config.music = BASE_CONFIG.music;
+    if (!config.music.popularWeddingSongs) {
+      config.music.popularWeddingSongs = BASE_CONFIG.music.popularWeddingSongs;
+    }
   }
 
   if (!config) {

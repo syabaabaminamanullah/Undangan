@@ -628,6 +628,9 @@
       cfg.music.url = document.getElementById('music-url').value;
       cfg.videoTeaser.youtubeId = document.getElementById('video-yt-id').value;
 
+      // Tag with version so app.js knows this config is compatible
+      cfg._version = "2.1";
+
       // Save to localStorage
       localStorage.setItem("wedding_custom_config", JSON.stringify(cfg));
 
