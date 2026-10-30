@@ -61,13 +61,13 @@ const WEDDING_CONFIG = {
       dateStr: "Senin, 14 Desember 2026",
       timeStr: "08:00 WIB s/d Selesai",
       venueName: "Kediaman Mempelai Pria",
-      venueDetail: "Kp. Haurduni RT 03/RW 10, Ds. Pananjung, Kec. Cangkuang, Kab. Bandung",
-      mapsUrl: "https://maps.google.com/?q=Kp.+Haurduni+Pananjung+Cangkuang+Bandung",
-      embedMap: "https://maps.google.com/maps?q=Kp.+Haurduni+Pananjung+Cangkuang+Bandung&t=&z=15&ie=UTF8&iwloc=&output=embed",
+      venueDetail: "Kp. Haur Duni RT 03 RW 10 Desa Pananjung, Kecamatan Cangkuang, Kabupaten Bandung",
+      mapsUrl: "https://maps.app.goo.gl/5eMH1nHU8JZHMRxw9",
+      embedMap: "https://maps.google.com/maps?q=-7.051779,107.526431&hl=id&z=16&output=embed",
       calendar: {
         title: "The Wedding of Abud & Intan - Akad Nikah",
-        description: "Menghadiri prosesi Akad Nikah Abud & Intan di Kp. Haurduni Pananjung Cangkuang Bandung.",
-        location: "Kp. Haurduni RT 03/RW 10, Ds. Pananjung, Kec. Cangkuang, Kab. Bandung",
+        description: "Menghadiri prosesi Akad Nikah Abud & Intan di Kp. Haur Duni, Desa Pananjung, Cangkuang, Bandung.",
+        location: "Kp. Haur Duni RT 03 RW 10 Desa Pananjung, Kecamatan Cangkuang, Kabupaten Bandung",
         start: "20261214T080000",
         end: "20261214T110000"
       }
@@ -79,13 +79,13 @@ const WEDDING_CONFIG = {
       dateStr: "Minggu, 20 Desember 2026",
       timeStr: "08:00 WIB s/d Selesai",
       venueName: "Kediaman Mempelai Pria",
-      venueDetail: "Kp. Haurduni RT 03/RW 10, Ds. Pananjung, Kec. Cangkuang, Kab. Bandung",
-      mapsUrl: "https://maps.google.com/?q=Kp.+Haurduni+Pananjung+Cangkuang+Bandung",
-      embedMap: "https://maps.google.com/maps?q=Kp.+Haurduni+Pananjung+Cangkuang+Bandung&t=&z=15&ie=UTF8&iwloc=&output=embed",
+      venueDetail: "Kp. Haur Duni RT 03 RW 10 Desa Pananjung, Kecamatan Cangkuang, Kabupaten Bandung",
+      mapsUrl: "https://maps.app.goo.gl/5eMH1nHU8JZHMRxw9",
+      embedMap: "https://maps.google.com/maps?q=-7.051779,107.526431&hl=id&z=16&output=embed",
       calendar: {
         title: "The Wedding of Abud & Intan - Resepsi Pernikahan",
-        description: "Merayakan resepsi pernikahan Abud & Intan di Kp. Haurduni Pananjung Cangkuang Bandung.",
-        location: "Kp. Haurduni RT 03/RW 10, Ds. Pananjung, Kec. Cangkuang, Kab. Bandung",
+        description: "Merayakan resepsi pernikahan Abud & Intan di Kp. Haur Duni, Desa Pananjung, Cangkuang, Bandung.",
+        location: "Kp. Haur Duni RT 03 RW 10 Desa Pananjung, Kecamatan Cangkuang, Kabupaten Bandung",
         start: "20261220T080000",
         end: "20261220T170000"
       }
@@ -210,7 +210,7 @@ const WEDDING_CONFIG = {
       title: "Kirim Kado Fisik",
       recipient: "Abud & Intan (Kediaman Mempelai Pria)",
       phone: "+62 812-3456-7890",
-      address: "Kp. Haurduni RT 03/RW 10, Ds. Pananjung, Kec. Cangkuang, Kab. Bandung",
+      address: "Kp. Haur Duni RT 03 RW 10 Desa Pananjung, Kecamatan Cangkuang, Kabupaten Bandung",
       note: "Konfirmasi pengiriman kado dapat dilakukan via WhatsApp mempelai."
     }
   },
