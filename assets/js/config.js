@@ -286,6 +286,22 @@ const WEDDING_CONFIG = {
         tag: "Majestic Wedding Waltz",
         desc: "Tarian waltz megah dan mewah yang mempercantik suasana pesta pernikahan bertema floral.",
         url: "assets/audio/waltz-of-flowers.mp3"
+      },
+      {
+        id: "s9",
+        title: "Degung Sunda 1",
+        artist: "Tradisional Sunda",
+        tag: "Alunan Degung Sakral",
+        desc: "Alunan instrumen degung gamelan khas Sunda bernuansa sakral, sejuk, dan syahdu.",
+        url: "assets/audio/degung-sunda-1.mp3"
+      },
+      {
+        id: "s10",
+        title: "Degung Sunda 2",
+        artist: "Tradisional Sunda",
+        tag: "Alunan Degung Syahdu",
+        desc: "Harmoni suling dan gamelan degung Sunda yang menenangkan suasana resepsi dan akad pernikahan.",
+        url: "assets/audio/degung-sunda-2.mp3"
       }
     ]
   },
