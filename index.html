@@ -979,35 +979,45 @@
     <!-- ====================================================================
          SECTION 11: CLOSING & FOOTER
          ==================================================================== -->
-    <footer class="py-20 px-4 text-center bg-gradient-to-t from-forest-dark via-forest to-transparent text-white">
-      <div class="max-w-xl mx-auto reveal-on-scroll">
+    <footer class="relative py-24 px-4 text-center text-white overflow-hidden">
+      <!-- Background foto berdua -->
+      <div class="absolute inset-0 -z-0">
+        <img src="assets/images/foto-berdua.png"
+             alt=""
+             class="w-full h-full object-cover object-[center_15%]"
+             loading="lazy">
+        <!-- Dark overlay gradient agar teks tetap terbaca -->
+        <div class="absolute inset-0 bg-gradient-to-b from-black/75 via-black/55 to-[#0d1a10]/92"></div>
+      </div>
+
+      <div class="relative z-10 max-w-xl mx-auto reveal-on-scroll">
         <div class="w-20 h-20 mx-auto mb-4">
-          <img src="assets/images/botanical-crest.svg" alt="Monogram" class="w-full h-full object-contain filter brightness-125">
+          <img src="assets/images/botanical-crest.svg" alt="Monogram" class="w-full h-full object-contain filter brightness-150 drop-shadow-lg">
         </div>
 
-        <p class="text-xs sm:text-sm text-stone-300 font-light leading-relaxed max-w-md mx-auto mb-6">
+        <p class="text-xs sm:text-sm text-stone-200 font-light leading-relaxed max-w-md mx-auto mb-6 drop-shadow">
           Merupakan suatu kehormatan dan kebahagiaan bagi kami apabila Bapak/Ibu/Saudara/i berkenan hadir dan memberikan doa restu kepada kami.
         </p>
 
-        <p class="text-xs text-stone-400 font-light italic mb-2">Kami yang berbahagia,</p>
-        <h2 class="font-serif italic text-4xl sm:text-5xl text-gold-light font-medium tracking-wide dyn-couple-title">
+        <p class="text-xs text-stone-300 font-light italic mb-2 drop-shadow">Kami yang berbahagia,</p>
+        <h2 class="font-serif italic text-4xl sm:text-5xl text-gold-light font-medium tracking-wide dyn-couple-title drop-shadow-lg">
           Abud <span class="text-gold">&amp;</span> Intan
         </h2>
-        <p class="text-xs text-stone-300 mt-2 font-light">Beserta Keluarga Besar Kedua Mempelai</p>
+        <p class="text-xs text-stone-200 mt-2 font-light drop-shadow">Beserta Keluarga Besar Kedua Mempelai</p>
 
         <div class="w-28 mx-auto my-6">
-          <img src="assets/images/botanical-divider.svg" alt="divider" class="w-full h-auto filter brightness-150 opacity-60">
+          <img src="assets/images/botanical-divider.svg" alt="divider" class="w-full h-auto filter brightness-200 opacity-70">
         </div>
 
-        <p class="text-[11px] text-stone-400 font-light tracking-wider">
+        <p class="text-[11px] text-stone-300 font-light tracking-wider drop-shadow">
           &copy; 2026 The Wedding of Abud &amp; Intan
         </p>
 
-        <div class="mt-4 pt-4 border-t border-stone-800/60 flex flex-col items-center justify-center gap-1.5">
-          <span class="text-[10px] uppercase tracking-[0.2em] text-stone-400 font-light">Created by</span>
+        <div class="mt-4 pt-4 border-t border-white/20 flex flex-col items-center justify-center gap-1.5">
+          <span class="text-[10px] uppercase tracking-[0.2em] text-stone-300 font-light">Created by</span>
           <div class="flex items-center gap-2">
-            <img src="assets/images/logo-ansa-tech.png" alt="ANSA Tech" class="h-6 w-auto object-contain">
-            <span class="text-xs font-serif font-medium text-gold/90 tracking-wider">ANSA Dev Production</span>
+            <img src="assets/images/logo-ansa-tech.png" alt="ANSA Tech" class="h-6 w-auto object-contain drop-shadow-md">
+            <span class="text-xs font-serif font-medium text-gold/90 tracking-wider drop-shadow">ANSA Dev Production</span>
           </div>
         </div>
       </div>
