@@ -933,32 +933,39 @@ document.addEventListener("DOMContentLoaded", () => {
     elements.forEach(el => observer.observe(el));
   }
 
-  // 14. Bottom Navigation Scroll Spy
+  // 14. Bottom Navigation Scroll Spy (Optimized with requestAnimationFrame for 60fps mobile scroll)
   function setupScrollSpy() {
     const sections = document.querySelectorAll("section[id]");
     const navItems = document.querySelectorAll(".dock-item");
+    let ticking = false;
 
     window.addEventListener("scroll", () => {
-      let currentId = "";
-      const scrollPos = window.scrollY + 220;
+      if (!ticking) {
+        requestAnimationFrame(() => {
+          let currentId = "";
+          const scrollPos = window.scrollY + 220;
 
-      sections.forEach(sec => {
-        const top = sec.offsetTop;
-        const height = sec.offsetHeight;
-        if (scrollPos >= top && scrollPos < top + height) {
-          currentId = sec.getAttribute("id");
-        }
-      });
+          sections.forEach(sec => {
+            const top = sec.offsetTop;
+            const height = sec.offsetHeight;
+            if (scrollPos >= top && scrollPos < top + height) {
+              currentId = sec.getAttribute("id");
+            }
+          });
 
-      navItems.forEach(item => {
-        const href = item.getAttribute("href");
-        if (href === `#${currentId}`) {
-          item.classList.add("active");
-        } else {
-          item.classList.remove("active");
-        }
-      });
-    });
+          navItems.forEach(item => {
+            const href = item.getAttribute("href");
+            if (href === `#${currentId}`) {
+              item.classList.add("active");
+            } else {
+              item.classList.remove("active");
+            }
+          });
+          ticking = false;
+        });
+        ticking = true;
+      }
+    }, { passive: true });
   }
 
   // Initialize all components

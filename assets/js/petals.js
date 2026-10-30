@@ -10,7 +10,8 @@ class BotanicalPetals {
     if (!this.canvas) return;
     this.ctx = this.canvas.getContext("2d");
     this.particles = [];
-    this.numParticles = 24; // gentle, non-distracting organic density
+    const isMobile = window.innerWidth < 768;
+    this.numParticles = isMobile ? 12 : 24; // responsive particle density for butter-smooth mobile 60fps
     this.width = window.innerWidth;
     this.height = window.innerHeight;
     this.animId = null;
@@ -116,13 +117,17 @@ class BotanicalPetals {
       this.ctx.rotate(p.rotation);
 
       if (p.isDust) {
-        // Shimmering Golden Dust Particle
+        // Shimmering Golden Dust Particle (GPU-friendly without shadowBlur lag)
         const shimmer = (Math.sin(p.oscillation * 2) + 1) * 0.5;
         this.ctx.beginPath();
         this.ctx.arc(0, 0, p.size, 0, Math.PI * 2);
         this.ctx.fillStyle = `rgba(214, 175, 55, ${p.opacity * (0.6 + shimmer * 0.4)})`;
-        this.ctx.shadowBlur = 6;
-        this.ctx.shadowColor = "rgba(240, 210, 120, 0.8)";
+        this.ctx.fill();
+        
+        // Soft aura glow rendered via lightweight radial arc
+        this.ctx.beginPath();
+        this.ctx.arc(0, 0, p.size * 1.8, 0, Math.PI * 2);
+        this.ctx.fillStyle = `rgba(240, 210, 120, ${p.opacity * 0.22})`;
         this.ctx.fill();
       } else {
         // Organic Olive / Eucalyptus Leaf with 3D Tilt
