@@ -392,14 +392,15 @@ body {
   -webkit-backdrop-filter: blur(16px);
   border: 1px solid rgba(212, 175, 55, 0.3);
   border-radius: 9999px;
-  padding: 0.35rem 0.5rem;
+  padding: 0.3rem 0.4rem;
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 0;
   box-shadow: 0 15px 35px -5px rgba(0, 0, 0, 0.4), 0 0 20px rgba(212, 175, 55, 0.15);
-  width: max-content;
-  max-width: calc(100vw - 1.5rem);
+  /* Pastikan tidak meluber keluar layar */
+  max-width: calc(100vw - 2rem);
+  box-sizing: border-box;
 }
 
 .dock-item {
@@ -407,7 +408,7 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 0.35rem 0.55rem;
+  padding: 0.3rem 0.5rem;
   border-radius: 9999px;
   color: #B5C4B7;
   font-size: 0.6rem;
@@ -415,7 +416,8 @@ body {
   text-decoration: none;
   transition: all 0.25s ease;
   white-space: nowrap;
-  flex-shrink: 0;
+  flex-shrink: 1;
+  min-width: 0;
 }
 
 .dock-item svg {
@@ -423,16 +425,29 @@ body {
   height: 15px;
   margin-bottom: 2px;
   transition: transform 0.2s ease;
+  flex-shrink: 0;
 }
 
-@media (max-width: 370px) {
+/* HP kecil: perkecil lebih lagi */
+@media (max-width: 400px) {
   .dock-item {
-    padding: 0.3rem 0.4rem;
-    font-size: 0.55rem;
+    padding: 0.28rem 0.38rem;
+    font-size: 0.52rem;
   }
   .dock-item svg {
     width: 14px;
     height: 14px;
+  }
+}
+
+@media (max-width: 340px) {
+  .dock-item {
+    padding: 0.25rem 0.3rem;
+    font-size: 0.48rem;
+  }
+  .dock-item svg {
+    width: 13px;
+    height: 13px;
   }
 }
 
@@ -651,11 +666,15 @@ body {
 .vinyl-disk,
 .audio-controller,
 .leaves-toggle,
-.bottom-dock,
 #petals-canvas {
   will-change: transform;
   -webkit-transform: translateZ(0);
   transform: translateZ(0);
+}
+
+/* Bottom dock: GPU layer TANPA override transform centering */
+.bottom-dock {
+  will-change: transform;
 }
 
 /* Reduce backdrop-filter cost on mobile */
