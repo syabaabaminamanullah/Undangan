@@ -23,8 +23,8 @@ const WEDDING_CONFIG = {
       father: "Bpk. Dargo",
       mother: "Ibu Nin Karwati",
       childOrder: "Putra kedua dari",
-      instagram: "https://instagram.com",
-      instagramHandle: "@abud",
+      instagram: "https://www.instagram.com/abud_doclo",
+      instagramHandle: "@abud_doclo",
       avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=800&q=80",
       bio: "Menemukan pelabuhan cinta dan ketenangan hati bersama Intan, melangkah bersama dalam ridho Ilahi."
     },
@@ -215,12 +215,78 @@ const WEDDING_CONFIG = {
     }
   },
 
-  // Background Music
+  // Background Music & Playlist Lagu Romantis Pernikahan Terpopuler
   music: {
-    title: "Until I Found You - Acoustic Fingerstyle",
-    artist: "Stephen Sanchez (Instrumental Cover)",
+    title: "Until I Found You",
+    artist: "Stephen Sanchez",
     url: "https://assets.mixkit.co/music/preview/mixkit-serene-view-443.mp3",
-    autoplayOnOpen: true
+    autoplayOnOpen: true,
+    popularWeddingSongs: [
+      {
+        id: "s1",
+        title: "Until I Found You",
+        artist: "Stephen Sanchez",
+        tag: "Modern Romance / Populer 2024-2026",
+        desc: "Lagu romantis bernuansa retro-klasik yang sedang paling digemari pasangan pengantin masa kini.",
+        url: "https://assets.mixkit.co/music/preview/mixkit-serene-view-443.mp3"
+      },
+      {
+        id: "s2",
+        title: "Beautiful in White",
+        artist: "Shane Filan (Westlife)",
+        tag: "Wedding Classic Anthem",
+        desc: "Lagu wajib saat gaun pengantin mempelai wanita melangkah anggun menuju pelaminan.",
+        url: "https://assets.mixkit.co/music/preview/mixkit-wedding-waltz-piano-music-1077.mp3"
+      },
+      {
+        id: "s3",
+        title: "Can't Help Falling in Love",
+        artist: "Elvis Presley / Kina Grannis",
+        tag: "All-Time Greatest Love Song",
+        desc: "Melodi sakral yang menyentuh sanubari, melambangkan kepasrahan hati yang tulus mencintai.",
+        url: "https://assets.mixkit.co/music/preview/mixkit-romantic-moment-1100.mp3"
+      },
+      {
+        id: "s4",
+        title: "A Thousand Years",
+        artist: "Christina Perri",
+        tag: "Sacred Eternal Vow",
+        desc: "Janji cinta abadi yang telah menanti seribu tahun dan akan mencintai seribu tahun lagi.",
+        url: "https://assets.mixkit.co/music/preview/mixkit-loving-you-117.mp3"
+      },
+      {
+        id: "s5",
+        title: "Perfect",
+        artist: "Ed Sheeran",
+        tag: "First Dance Anthem",
+        desc: "Lagu dansa pernikahan terpopuler di dunia yang melukiskan cinta sejati yang sempurna apa adanya.",
+        url: "https://assets.mixkit.co/music/preview/mixkit-sweet-love-112.mp3"
+      },
+      {
+        id: "s6",
+        title: "From This Moment On",
+        artist: "Shania Twain",
+        tag: "Timeless Wedding Vow",
+        desc: "Lagu ikrar suci pernikahan legendaris: 'Mulai detik ini, aku menyerahkan seluruh cintaku untukmu.'",
+        url: "https://assets.mixkit.co/music/preview/mixkit-serene-view-443.mp3"
+      },
+      {
+        id: "s7",
+        title: "All of Me",
+        artist: "John Legend",
+        tag: "Unconditional Love",
+        desc: "Cinta tanpa syarat yang menerima seluruh kelebihan dan ketidaksempurnaan pasangan.",
+        url: "https://assets.mixkit.co/music/preview/mixkit-romantic-moment-1100.mp3"
+      },
+      {
+        id: "s8",
+        title: "Marry You",
+        artist: "Bruno Mars",
+        tag: "Joyful & Energetic Celebration",
+        desc: "Lagu pernikahan bernuansa ceria, penuh senyuman, kebahagiaan, dan rasa syukur.",
+        url: "https://assets.mixkit.co/music/preview/mixkit-sweet-love-112.mp3"
+      }
+    ]
   },
 
   // Keluarga Besar & Turut Mengundang

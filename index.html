@@ -141,14 +141,19 @@
   <div id="main-content" class="min-w-full relative pb-28">
 
     <!-- FLOATING CONTROLS (Audio & Petals Toggle) -->
-    <div id="audio-toggle" class="audio-controller" title="Putar / Jeda Musik">
-      <div id="vinyl-disk" class="vinyl-disk">
-        <i data-lucide="music" class="w-3.5 h-3.5 text-gold"></i>
+    <div class="audio-controller">
+      <div id="audio-toggle" class="flex items-center gap-2 cursor-pointer" title="Putar / Jeda Musik">
+        <div id="vinyl-disk" class="vinyl-disk">
+          <i data-lucide="music" class="w-3.5 h-3.5 text-gold"></i>
+        </div>
+        <div class="flex flex-col pr-1">
+          <span class="text-[11px] font-medium text-stone-200 leading-tight dyn-music-title">Until I Found You</span>
+          <span class="text-[9px] text-gold/80 tracking-wider dyn-music-artist">Stephen Sanchez</span>
+        </div>
       </div>
-      <div class="flex flex-col pr-1">
-        <span class="text-[11px] font-medium text-stone-200 leading-tight dyn-music-title">Until I Found You</span>
-        <span class="text-[9px] text-gold/80 tracking-wider dyn-music-artist">Acoustic Instrumental</span>
-      </div>
+      <button onclick="openMusicModal()" class="w-7 h-7 rounded-full bg-gold/25 hover:bg-gold/40 border border-gold/40 text-gold flex items-center justify-center transition ml-1" title="Pilih Lagu Lain (Playlist)">
+        <i data-lucide="list-music" class="w-3.5 h-3.5"></i>
+      </button>
     </div>
 
     <button id="leaves-toggle" class="leaves-toggle" title="Nyalakan / Matikan Efek Kelopak Daun">
@@ -277,9 +282,9 @@
             </p>
 
             <div class="mt-4">
-              <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" class="btn-outline-gold text-xs">
+              <a href="https://www.instagram.com/abud_doclo" target="_blank" rel="noopener noreferrer" class="btn-outline-gold text-xs">
                 <i data-lucide="instagram" class="w-3.5 h-3.5"></i>
-                <span class="dyn-groom-ig">@abud</span>
+                <span class="dyn-groom-ig">@abud_doclo</span>
               </a>
             </div>
           </div>
@@ -1064,6 +1069,27 @@
           <i data-lucide="chevron-right" class="w-5 h-5"></i>
         </button>
       </div>
+    </div>
+  </div>
+
+
+  <!-- ====================================================================
+       MODAL 3: MUSIC PLAYLIST SELECTOR
+       ==================================================================== -->
+  <div id="music-modal" class="modal-backdrop" onclick="if(event.target===this)closeMusicModal()">
+    <div class="luxury-card p-6 sm:p-8 max-w-lg w-full bg-white relative ornate-border max-h-[85vh] overflow-y-auto">
+      <button onclick="closeMusicModal()" class="absolute top-4 right-4 text-stone-400 hover:text-stone-800 transition">
+        <i data-lucide="x" class="w-5 h-5"></i>
+      </button>
+      <div class="flex items-center gap-3 mb-1">
+        <div class="w-9 h-9 rounded-full bg-forest/10 flex items-center justify-center">
+          <i data-lucide="music-2" class="w-4 h-4 text-forest-dark"></i>
+        </div>
+        <h3 class="font-serif italic text-2xl text-forest-dark font-semibold">Pilih Musik Latar</h3>
+      </div>
+      <p class="text-xs text-stone-500 mb-5 ml-12">Lagu romantis paling populer untuk momen pernikahan — klik untuk memutar</p>
+      <div id="music-playlist-modal-list" class="space-y-2.5"></div>
+      <p class="text-center text-[10px] text-stone-400 mt-5 italic">🎵 Dinikmati bersama orang-orang terkasih</p>
     </div>
   </div>
 

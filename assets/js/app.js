@@ -375,6 +375,96 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // 10. QRIS Modal
   const qrisModal = document.getElementById("qris-modal");
+
+  // 10b. Music Playlist Modal
+  const musicModal = document.getElementById("music-modal");
+
+  function renderMusicPlaylistModal() {
+    const listEl = document.getElementById("music-playlist-modal-list");
+    if (!listEl) return;
+    const songs = (config.music && config.music.popularWeddingSongs) ? config.music.popularWeddingSongs : [];
+    if (songs.length === 0) {
+      listEl.innerHTML = `<p class="text-center text-stone-400 py-4 text-sm italic">Belum ada lagu dalam daftar putar.</p>`;
+      return;
+    }
+
+    // Detect currently active song URL
+    const currentSrc = audioEl ? (audioEl.currentSrc || audioEl.src || "") : "";
+
+    listEl.innerHTML = songs.map((song, idx) => {
+      const isActive = currentSrc && currentSrc.includes(song.url.split("/").pop().split("?")[0]);
+      return `
+        <div class="flex items-center gap-3 px-4 py-3 rounded-xl border cursor-pointer group transition
+          ${isActive
+            ? 'border-gold bg-amber-50 shadow-sm'
+            : 'border-stone-100 hover:border-gold/50 hover:bg-amber-50/40 bg-white/50'}"
+          onclick="switchTrack('${escapeHtmlAttr(song.url)}', '${escapeHtmlAttr(song.title)}', '${escapeHtmlAttr(song.artist)}')">
+          <div class="w-8 h-8 rounded-full flex-shrink-0 flex items-center justify-center transition
+            ${isActive ? 'bg-gold text-white' : 'bg-forest/10 text-forest-dark group-hover:bg-gold group-hover:text-white'}">
+            ${isActive
+              ? `<i data-lucide="volume-2" class="w-3.5 h-3.5"></i>`
+              : `<i data-lucide="play" class="w-3.5 h-3.5"></i>`}
+          </div>
+          <div class="flex-1 min-w-0">
+            <p class="text-sm font-semibold text-stone-800 truncate ${isActive ? 'text-forest-dark' : ''}">${escapeHtml(song.title)}</p>
+            <p class="text-xs text-stone-500 truncate">${escapeHtml(song.artist)}</p>
+          </div>
+          <span class="text-[10px] text-gold/70 font-medium tracking-wide flex-shrink-0 ${isActive ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'} transition">
+            ${isActive ? '♪ Playing' : 'Putar'}
+          </span>
+        </div>
+      `;
+    }).join("");
+
+    // Re-initialize Lucide icons for dynamically added icons
+    if (window.lucide) lucide.createIcons({ nodes: [listEl] });
+  }
+
+  window.openMusicModal = function() {
+    renderMusicPlaylistModal();
+    if (musicModal) musicModal.classList.add("open");
+  };
+
+  window.closeMusicModal = function() {
+    if (musicModal) musicModal.classList.remove("open");
+  };
+
+  window.switchTrack = function(url, title, artist) {
+    if (!audioEl) return;
+    audioEl.src = url;
+    audioEl.load();
+    audioEl.play().then(() => {
+      isAudioPlaying = true;
+      if (vinylDisk) vinylDisk.classList.add("playing");
+    }).catch(err => {
+      console.warn("Track switch error:", err);
+    });
+
+    // Update displayed song info
+    const titleEls = document.querySelectorAll(".dyn-music-title");
+    const artistEls = document.querySelectorAll(".dyn-music-artist");
+    titleEls.forEach(el => el.textContent = title);
+    artistEls.forEach(el => el.textContent = artist);
+
+    // Update config so it persists within session
+    if (config.music) {
+      config.music.title = title;
+      config.music.artist = artist;
+      config.music.url = url;
+    }
+
+    showToast(`♪ Memutar: ${title}`);
+
+    // Refresh modal list to show active state
+    setTimeout(() => renderMusicPlaylistModal(), 100);
+  };
+
+  function escapeHtmlAttr(str) {
+    return String(str || "")
+      .replace(/&/g, "&amp;")
+      .replace(/'/g, "&#39;")
+      .replace(/"/g, "&quot;");
+  }
   window.openQrisModal = function() {
     if (qrisModal) qrisModal.classList.add("open");
   };
