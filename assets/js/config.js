@@ -36,7 +36,7 @@ const WEDDING_CONFIG = {
       childOrder: "Putri pertama dari",
       instagram: "https://www.instagram.com/intansyintiaintansyintia?mdxt=MTB4bWt5eXR2bzg2ag==",
       instagramHandle: "@intansyintiaintansyintia",
-      avatar: "assets/images/foto-intan.png",
+      avatar: "assets/images/foto-intan-latar-biru.png",
       bio: "Merajut rasa dan asa bersama Abud menuju bahtera rumah tangga yang sakinah, mawaddah, warahmah."
     }
   },
@@ -136,7 +136,7 @@ const WEDDING_CONFIG = {
       category: "portrait"
     },
     {
-      url: "assets/images/foto-intan.png",
+      url: "assets/images/foto-intan-latar-biru.png",
       caption: "Intan Syintia Nurrannisa (Intan)",
       category: "portrait"
     },
