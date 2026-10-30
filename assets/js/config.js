@@ -34,8 +34,8 @@ const WEDDING_CONFIG = {
       father: "Bpk. M. Muhsinul K.",
       mother: "Ibu Herni Nuraeni",
       childOrder: "Putri pertama dari",
-      instagram: "https://instagram.com",
-      instagramHandle: "@intan",
+      instagram: "https://www.instagram.com/intansyintiaintansyintia",
+      instagramHandle: "@intansyintiaintansyintia",
       avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=800&q=80",
       bio: "Merajut rasa dan asa bersama Abud menuju bahtera rumah tangga yang sakinah, mawaddah, warahmah."
     }
