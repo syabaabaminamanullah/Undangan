@@ -141,25 +141,23 @@
        ==================================================================== -->
   <div id="main-content" class="min-w-full relative pb-28">
 
-    <!-- FLOATING CONTROLS (Audio & Petals Toggle) -->
-    <div class="audio-controller">
-      <div id="audio-toggle" class="flex items-center gap-2 cursor-pointer" title="Putar / Jeda Musik">
+    <!-- FLOATING CONTROLS (Audio & Petals Toggle) — disusun vertikal di kiri -->
+    <div class="floating-controls-group">
+      <!-- Music icon (atas) -->
+      <div class="audio-controller" id="audio-toggle" title="Putar / Jeda Musik">
         <div id="vinyl-disk" class="vinyl-disk">
           <i data-lucide="music" class="w-3.5 h-3.5 text-gold"></i>
         </div>
-        <div class="flex flex-col pr-1">
-          <span class="text-[11px] font-medium text-stone-200 leading-tight dyn-music-title">Canon in D</span>
-          <span class="text-[9px] text-gold/80 tracking-wider dyn-music-artist">Johann Pachelbel</span>
-        </div>
       </div>
-      <button onclick="openMusicModal()" class="w-7 h-7 rounded-full bg-gold/25 hover:bg-gold/40 border border-gold/40 text-gold flex items-center justify-center transition ml-1" title="Pilih Lagu Lain (Playlist)">
-        <i data-lucide="list-music" class="w-3.5 h-3.5"></i>
+      <!-- Playlist button (tengah) -->
+      <button onclick="openMusicModal()" class="floating-icon-btn" title="Pilih Lagu (Playlist)">
+        <i data-lucide="list-music" class="w-4 h-4"></i>
+      </button>
+      <!-- Daun toggle (bawah) -->
+      <button id="leaves-toggle" class="leaves-toggle" title="Nyalakan / Matikan Efek Kelopak Daun">
+        <i data-lucide="leaf" class="w-4 h-4"></i>
       </button>
     </div>
-
-    <button id="leaves-toggle" class="leaves-toggle" title="Nyalakan / Matikan Efek Kelopak Daun">
-      <i data-lucide="leaf" class="w-4 h-4"></i>
-    </button>
 
 
     <!-- ====================================================================
