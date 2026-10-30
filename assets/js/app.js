@@ -613,12 +613,22 @@ document.addEventListener("DOMContentLoaded", () => {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(wishes));
   }
 
+  function getLikedWishesList() {
+    try {
+      return JSON.parse(localStorage.getItem("wedding_user_liked_wishes") || "[]");
+    } catch (e) {
+      return [];
+    }
+  }
+
   function renderWishes(filter = "all") {
     const listEl = document.getElementById("wishes-list");
     const countEl = document.getElementById("wishes-count");
     if (!listEl) return;
 
     const allWishes = getStoredWishes();
+    const myLikedList = getLikedWishesList();
+
     const filtered = allWishes.filter(w => {
       if (filter === "hadir") return w.attendance === "hadir";
       if (filter === "ragu") return w.attendance === "ragu";
@@ -649,6 +659,8 @@ document.addEventListener("DOMContentLoaded", () => {
         badgeText = "Masih Ragu";
       }
 
+      const isLiked = myLikedList.includes(w.id);
+
       const card = document.createElement("div");
       card.className = "p-4 rounded-2xl bg-white/70 border border-stone-200/80 shadow-sm transition hover:shadow-md";
       card.innerHTML = `
@@ -675,8 +687,8 @@ document.addEventListener("DOMContentLoaded", () => {
               <span>Edit</span>
             </button>
           </div>
-          <button onclick="toggleWishLike('${w.id}', this)" class="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-stone-50 hover:bg-rose-50 hover:text-rose-600 transition text-stone-600 active:scale-125 transform">
-            <svg class="w-3.5 h-3.5 fill-current text-rose-500" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+          <button onclick="toggleWishLike('${w.id}', this)" class="flex items-center gap-1.5 px-2.5 py-1 rounded-full border transition active:scale-110 transform ${isLiked ? 'bg-rose-50 border-rose-200 text-rose-600 font-bold' : 'bg-stone-50 border-stone-200 hover:bg-rose-50 hover:text-rose-600 text-stone-600'}" title="${isLiked ? 'Batalkan tanda cinta' : 'Beri 1 tanda cinta'}">
+            <svg class="w-3.5 h-3.5 ${isLiked ? 'fill-rose-500 text-rose-500' : 'fill-none stroke-current'}" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
             <span class="font-medium text-xs wish-like-count">${w.likes || 0}</span>
           </button>
         </div>
@@ -685,20 +697,29 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // Unlimited Likes for Wishes
+  // 1-Like-per-device-per-wish (Toggle Like/Unlike)
   window.toggleWishLike = function(id, btn) {
+    let myLikedList = getLikedWishesList();
     const wishes = getStoredWishes();
     const item = wishes.find(w => w.id === id);
-    if (item) {
-      item.likes = (item.likes || 0) + 1;
+    if (!item) return;
+
+    if (myLikedList.includes(id)) {
+      // Already liked on this device -> Unlike (-1)
+      item.likes = Math.max(0, (item.likes || 1) - 1);
+      myLikedList = myLikedList.filter(k => k !== id);
+      localStorage.setItem("wedding_user_liked_wishes", JSON.stringify(myLikedList));
       saveWishes(wishes);
-      if (btn) {
-        const countSpan = btn.querySelector(".wish-like-count");
-        if (countSpan) countSpan.textContent = item.likes;
-        btn.classList.add("scale-125");
-        setTimeout(() => btn.classList.remove("scale-125"), 200);
-      }
-      showToast("Terima kasih atas doa & tanda cinta Anda! ❤️");
+      renderWishes();
+      showToast("Tanda cinta dibatalkan.");
+    } else {
+      // Not yet liked -> Add 1 like
+      item.likes = (item.likes || 0) + 1;
+      myLikedList.push(id);
+      localStorage.setItem("wedding_user_liked_wishes", JSON.stringify(myLikedList));
+      saveWishes(wishes);
+      renderWishes();
+      showToast("Terima kasih atas tanda cinta Anda! ❤️");
     }
   };
 
