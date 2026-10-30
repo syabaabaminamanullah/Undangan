@@ -210,7 +210,7 @@ const WEDDING_CONFIG = {
       enabled: true,
       title: "Kirim Kado Fisik",
       recipient: "Abud & Intan (Kediaman Mempelai Pria)",
-      phone: "+62 812-3456-7890",
+      phone: "+62 821-1877-2639",
       address: "Kp. Haur Duni RT 03 RW 10 Desa Pananjung, Kecamatan Cangkuang, Kabupaten Bandung",
       note: "Konfirmasi pengiriman kado dapat dilakukan via WhatsApp mempelai."
     }
