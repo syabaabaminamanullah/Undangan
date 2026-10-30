@@ -389,8 +389,8 @@
                 <div class="flex items-start gap-3">
                   <i data-lucide="map-pin" class="w-4 h-4 text-gold flex-shrink-0 mt-0.5"></i>
                   <div>
-                    <strong class="font-semibold text-stone-900 block dyn-akad-venue">Kediaman Mempelai Pria</strong>
-                    <span class="dyn-akad-address">Kp. Haur Duni RT 03 RW 10 Desa Pananjung, Kecamatan Cangkuang, Kabupaten Bandung</span>
+                    <strong class="font-semibold text-stone-900 block dyn-akad-venue">Kediaman Mempelai Wanita</strong>
+                    <span class="dyn-akad-address">Kp. Sindangsari RT 01 RW 10 Desa Pananjung, Kecamatan Cangkuang, Kabupaten Bandung</span>
                   </div>
                 </div>
               </div>
@@ -401,9 +401,9 @@
                 <i data-lucide="calendar-plus" class="w-3.5 h-3.5"></i>
                 <span>Simpan di Kalender</span>
               </button>
-              <a href="https://maps.app.goo.gl/5eMH1nHU8JZHMRxw9" target="_blank" rel="noopener noreferrer" class="btn-outline-gold text-xs dyn-akad-maps">
+              <a href="https://www.google.com/maps/dir/?api=1&amp;destination=-7.0490005,107.526473" target="_blank" rel="noopener noreferrer" class="btn-outline-gold text-xs dyn-akad-maps flex items-center gap-1.5" title="Dapatkan Arah Navigasi Langsung">
                 <i data-lucide="navigation" class="w-3.5 h-3.5"></i>
-                <span>Buka Peta</span>
+                <span>Dapatkan Arah</span>
               </a>
             </div>
           </div>
@@ -446,9 +446,9 @@
                 <i data-lucide="calendar-plus" class="w-3.5 h-3.5"></i>
                 <span>Simpan di Kalender</span>
               </button>
-              <a href="https://maps.app.goo.gl/5eMH1nHU8JZHMRxw9" target="_blank" rel="noopener noreferrer" class="btn-outline-gold text-xs dyn-resepsi-maps">
+              <a href="https://www.google.com/maps/dir/?api=1&amp;destination=-7.051779,107.526431" target="_blank" rel="noopener noreferrer" class="btn-outline-gold text-xs dyn-resepsi-maps flex items-center gap-1.5" title="Dapatkan Arah Navigasi Langsung">
                 <i data-lucide="navigation" class="w-3.5 h-3.5"></i>
-                <span>Buka Peta</span>
+                <span>Dapatkan Arah</span>
               </a>
             </div>
           </div>
@@ -471,18 +471,45 @@
           </a>
         </div>
 
-        <!-- GOOGLE MAPS LIVE EMBED -->
-        <div class="mt-8 rounded-2xl overflow-hidden border border-gold/30 shadow-xl reveal-on-scroll">
+        <!-- GOOGLE MAPS LIVE EMBED WITH DIRECTION BUTTONS -->
+        <div class="mt-8 rounded-2xl overflow-hidden border border-gold/30 shadow-xl reveal-on-scroll bg-white">
+          
+          <!-- Map Tab Switcher -->
+          <div class="flex border-b border-stone-200 bg-stone-50/80 p-2 gap-2 text-xs font-semibold">
+            <button id="map-tab-resepsi" onclick="switchMapLocation('resepsi')" class="flex-1 py-2 px-3 rounded-xl bg-forest-dark text-[#FFF5D0] shadow-sm flex items-center justify-center gap-1.5 transition">
+              <i data-lucide="map-pin" class="w-3.5 h-3.5 text-gold"></i>
+              <span>Lokasi Resepsi (Pria)</span>
+            </button>
+            <button id="map-tab-akad" onclick="switchMapLocation('akad')" class="flex-1 py-2 px-3 rounded-xl bg-white text-stone-600 border border-stone-200 hover:bg-stone-100 flex items-center justify-center gap-1.5 transition">
+              <i data-lucide="map-pin" class="w-3.5 h-3.5 text-stone-400"></i>
+              <span>Lokasi Akad (Wanita)</span>
+            </button>
+          </div>
+
           <iframe 
-            src="https://maps.google.com/maps?q=-7.051779,107.526431&hl=id&z=16&output=embed" 
+            id="google-maps-iframe"
+            src="https://maps.google.com/maps?q=-7.051779,107.526431&amp;hl=id&amp;z=16&amp;output=embed" 
             width="100%" 
-            height="360" 
+            height="340" 
             style="border:0;" 
             allowfullscreen="" 
             loading="lazy" 
             referrerpolicy="no-referrer-when-downgrade"
             title="Lokasi Pernikahan Abud &amp; Intan">
           </iframe>
+
+          <!-- Quick Action Directions Bar -->
+          <div class="p-4 bg-white border-t border-stone-100 flex flex-col sm:flex-row items-center justify-between gap-3">
+            <div class="text-left w-full sm:w-auto">
+              <span id="map-active-title" class="font-bold text-stone-900 text-xs block">Kediaman Mempelai Pria (Resepsi)</span>
+              <span id="map-active-addr" class="text-[11px] text-stone-500 font-light block">Kp. Haur Duni RT 03 RW 10 Desa Pananjung, Cangkuang</span>
+            </div>
+            <a id="btn-get-directions" href="https://www.google.com/maps/dir/?api=1&amp;destination=-7.051779,107.526431" target="_blank" rel="noopener noreferrer" class="btn-gold text-xs w-full sm:w-auto flex items-center justify-center gap-2 shadow-md">
+              <i data-lucide="navigation" class="w-4 h-4"></i>
+              <span>Dapatkan Arah Sekarang</span>
+            </a>
+          </div>
+
         </div>
       </div>
     </section>
@@ -797,28 +824,30 @@
 
         <div class="space-y-6">
           
-          <!-- BANK BCA CARD -->
-          <div class="luxury-card p-6 sm:p-8 ornate-border bg-gradient-to-br from-white/90 via-stone-50/80 to-amber-50/50 text-left reveal-on-scroll">
+          <!-- BANK SEABANK CARD -->
+          <div class="luxury-card p-6 sm:p-8 ornate-border bg-gradient-to-br from-white/95 via-stone-50/90 to-amber-50/60 text-left reveal-on-scroll shadow-lg">
             <div class="flex items-center justify-between mb-4">
-              <span class="font-royal text-xs tracking-widest text-blue-900 font-bold uppercase dyn-bank1-name">Bank Central Asia (BCA)</span>
-              <i data-lucide="credit-card" class="w-5 h-5 text-gold"></i>
+              <span class="font-royal text-xs tracking-widest text-emerald-800 font-bold uppercase dyn-bank1-name">SeaBank</span>
+              <div class="w-7 h-7 rounded-full bg-emerald-800/10 flex items-center justify-center">
+                <i data-lucide="credit-card" class="w-4 h-4 text-emerald-800"></i>
+              </div>
             </div>
             <p class="text-xs text-stone-500 font-light mb-1">Nomor Rekening</p>
-            <p class="font-mono text-xl sm:text-2xl font-bold tracking-wider text-stone-900 mb-1 dyn-bank1-number">
-              8735 0912 44
+            <p class="font-mono text-2xl sm:text-3xl font-bold tracking-wider text-stone-900 mb-1 dyn-bank1-number">
+              9019 5620 2880
             </p>
             <p class="text-xs text-stone-600 font-medium mb-5 dyn-bank1-holder">
-              a.n. Abdullah Nur Cahya
+              a.n. Abdullah Nur Cahya (Abud)
             </p>
 
-            <button onclick="copyText('8735091244', 'No. Rekening BCA')" class="btn-outline-gold text-xs w-full sm:w-auto dyn-bank1-btn">
+            <button onclick="copyText('901956202880', 'No. Rekening SeaBank')" class="btn-gold text-xs w-full sm:w-auto dyn-bank1-btn flex items-center justify-center gap-2">
               <i data-lucide="copy" class="w-3.5 h-3.5"></i>
-              <span>Salin Nomor Rekening BCA</span>
+              <span>Salin Nomor Rekening SeaBank</span>
             </button>
           </div>
 
-          <!-- BANK MANDIRI CARD -->
-          <div class="luxury-card p-6 sm:p-8 ornate-border bg-gradient-to-br from-white/90 via-stone-50/80 to-amber-50/50 text-left reveal-on-scroll">
+          <!-- BANK 2 CARD (HIDDEN KARENA HANYA SEABANK) -->
+          <div class="luxury-card p-6 sm:p-8 ornate-border bg-gradient-to-br from-white/90 via-stone-50/80 to-amber-50/50 text-left reveal-on-scroll hidden" style="display: none;">
             <div class="flex items-center justify-between mb-4">
               <span class="font-royal text-xs tracking-widest text-amber-800 font-bold uppercase dyn-bank2-name">Bank Mandiri</span>
               <i data-lucide="credit-card" class="w-5 h-5 text-gold"></i>
@@ -1090,6 +1119,69 @@
       <p class="text-xs text-stone-500 mb-5 ml-12">Lagu romantis paling populer untuk momen pernikahan — klik untuk memutar</p>
       <div id="music-playlist-modal-list" class="space-y-2.5"></div>
       <p class="text-center text-[10px] text-stone-400 mt-5 italic">🎵 Dinikmati bersama orang-orang terkasih</p>
+    </div>
+  </div>
+
+
+  <!-- ====================================================================
+       MODAL 4: EDIT UCAPAN TAMU (TYPO FIX)
+       ==================================================================== -->
+  <div id="edit-wish-modal" class="modal-backdrop" onclick="if(event.target===this)closeEditWishModal()">
+    <div class="luxury-card p-6 sm:p-8 max-w-md w-full bg-white relative ornate-border max-h-[90vh] overflow-y-auto">
+      <button onclick="closeEditWishModal()" class="absolute top-4 right-4 text-stone-400 hover:text-stone-800 transition">
+        <i data-lucide="x" class="w-5 h-5"></i>
+      </button>
+
+      <div class="flex items-center gap-2.5 mb-2">
+        <div class="w-8 h-8 rounded-full bg-amber-100 flex items-center justify-center text-amber-800">
+          <i data-lucide="edit-3" class="w-4 h-4"></i>
+        </div>
+        <h3 class="font-serif italic text-2xl text-forest-dark font-semibold">Perbaiki Ucapan</h3>
+      </div>
+      <p class="text-xs text-stone-500 mb-5">Perbaiki kesalahan ketik (typo) pada nama atau isi doa Anda.</p>
+
+      <input type="hidden" id="edit-wish-id">
+
+      <div class="space-y-4 text-xs">
+        <div>
+          <label class="block font-semibold text-stone-700 mb-1">Nama Lengkap</label>
+          <input type="text" id="edit-wish-name" class="w-full px-3.5 py-2.5 rounded-xl border border-stone-300 focus:border-[#D4AF37] outline-none text-stone-900 text-sm">
+        </div>
+
+        <div>
+          <label class="block font-semibold text-stone-700 mb-1">Konfirmasi Kehadiran</label>
+          <select id="edit-wish-attendance" class="w-full px-3.5 py-2.5 rounded-xl border border-stone-300 focus:border-[#D4AF37] outline-none text-stone-900 text-xs">
+            <option value="hadir">Alhamdulillah, Hadir</option>
+            <option value="ragu">Masih Ragu / Belum Pasti</option>
+            <option value="tidak">Mohon Maaf, Berhalangan</option>
+          </select>
+        </div>
+
+        <div>
+          <label class="block font-semibold text-stone-700 mb-1">Jumlah Tamu</label>
+          <select id="edit-wish-pax" class="w-full px-3.5 py-2.5 rounded-xl border border-stone-300 focus:border-[#D4AF37] outline-none text-stone-900 text-xs">
+            <option value="1">1 Orang</option>
+            <option value="2">2 Orang</option>
+            <option value="3">3 Orang</option>
+            <option value="4">4 Orang</option>
+            <option value="5">5 Orang atau Lebih</option>
+          </select>
+        </div>
+
+        <div>
+          <label class="block font-semibold text-stone-700 mb-1">Doa &amp; Ucapan</label>
+          <textarea id="edit-wish-message" rows="4" class="w-full px-3.5 py-2.5 rounded-xl border border-stone-300 focus:border-[#D4AF37] outline-none text-stone-900 text-sm"></textarea>
+        </div>
+
+        <div class="pt-2 flex items-center justify-end gap-2">
+          <button onclick="closeEditWishModal()" class="px-4 py-2 rounded-xl text-stone-500 hover:bg-stone-100 font-medium">
+            Batal
+          </button>
+          <button onclick="saveEditedWish()" class="btn-gold text-xs px-5 py-2.5">
+            Simpan Perbaikan
+          </button>
+        </div>
+      </div>
     </div>
   </div>
 

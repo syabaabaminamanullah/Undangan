@@ -60,14 +60,15 @@ const WEDDING_CONFIG = {
       title: "Akad Nikah",
       dateStr: "Senin, 14 Desember 2026",
       timeStr: "08:00 WIB s/d Selesai",
-      venueName: "Kediaman Mempelai Pria",
-      venueDetail: "Kp. Haur Duni RT 03 RW 10 Desa Pananjung, Kecamatan Cangkuang, Kabupaten Bandung",
-      mapsUrl: "https://maps.app.goo.gl/5eMH1nHU8JZHMRxw9",
-      embedMap: "https://maps.google.com/maps?q=-7.051779,107.526431&hl=id&z=16&output=embed",
+      venueName: "Kediaman Mempelai Wanita",
+      venueDetail: "Kp. Sindangsari RT 01 RW 10 Desa Pananjung, Kecamatan Cangkuang, Kabupaten Bandung",
+      mapsUrl: "https://maps.app.goo.gl/iffcdeXpiphR9kZx9",
+      directionUrl: "https://www.google.com/maps/dir/?api=1&destination=-7.0490005,107.526473",
+      embedMap: "https://maps.google.com/maps?q=-7.0490005,107.526473&hl=id&z=16&output=embed",
       calendar: {
         title: "The Wedding of Abud & Intan - Akad Nikah",
-        description: "Menghadiri prosesi Akad Nikah Abud & Intan di Kp. Haur Duni, Desa Pananjung, Cangkuang, Bandung.",
-        location: "Kp. Haur Duni RT 03 RW 10 Desa Pananjung, Kecamatan Cangkuang, Kabupaten Bandung",
+        description: "Menghadiri prosesi Akad Nikah Abud & Intan di Kediaman Mempelai Wanita, Kp. Sindangsari RT 01 RW 10 Desa Pananjung, Cangkuang, Bandung.",
+        location: "Kp. Sindangsari RT 01 RW 10 Desa Pananjung, Kecamatan Cangkuang, Kabupaten Bandung",
         start: "20261214T080000",
         end: "20261214T110000"
       }
@@ -81,10 +82,11 @@ const WEDDING_CONFIG = {
       venueName: "Kediaman Mempelai Pria",
       venueDetail: "Kp. Haur Duni RT 03 RW 10 Desa Pananjung, Kecamatan Cangkuang, Kabupaten Bandung",
       mapsUrl: "https://maps.app.goo.gl/5eMH1nHU8JZHMRxw9",
+      directionUrl: "https://www.google.com/maps/dir/?api=1&destination=-7.051779,107.526431",
       embedMap: "https://maps.google.com/maps?q=-7.051779,107.526431&hl=id&z=16&output=embed",
       calendar: {
         title: "The Wedding of Abud & Intan - Resepsi Pernikahan",
-        description: "Merayakan resepsi pernikahan Abud & Intan di Kp. Haur Duni, Desa Pananjung, Cangkuang, Bandung.",
+        description: "Merayakan resepsi pernikahan Abud & Intan di Kediaman Mempelai Pria, Kp. Haur Duni, Desa Pananjung, Cangkuang, Bandung.",
         location: "Kp. Haur Duni RT 03 RW 10 Desa Pananjung, Kecamatan Cangkuang, Kabupaten Bandung",
         start: "20261220T080000",
         end: "20261220T170000"
@@ -192,16 +194,10 @@ const WEDDING_CONFIG = {
     subtitle: "Doa restu Anda merupakan karunia terindah bagi kami. Namun jika memberi adalah ungkapan kasih Anda, kami menyediakan kemudahan amplop digital & pengiriman tanda kasih di bawah ini:",
     banks: [
       {
-        bankName: "Bank Central Asia (BCA)",
-        accountNumber: "8735091244",
+        bankName: "SeaBank",
+        accountNumber: "901956202880",
         accountHolder: "Abdullah Nur Cahya",
-        logo: "https://upload.wikimedia.org/wikipedia/commons/5/5c/Bank_Central_Asia.svg"
-      },
-      {
-        bankName: "Bank Mandiri / BRI",
-        accountNumber: "1370018992011",
-        accountHolder: "Intan Syintia Nurrannisa",
-        logo: "https://upload.wikimedia.org/wikipedia/commons/a/ad/Bank_Mandiri_logo_2016.svg"
+        logo: "https://upload.wikimedia.org/wikipedia/commons/4/4b/SeaBank_logo.svg"
       }
     ],
     qris: {

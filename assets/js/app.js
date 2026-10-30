@@ -44,6 +44,12 @@ document.addEventListener("DOMContentLoaded", () => {
           if (BASE_CONFIG.eventDate) {
             config.eventDate = BASE_CONFIG.eventDate;
           }
+          if (BASE_CONFIG.events) {
+            config.events = BASE_CONFIG.events;
+          }
+          if (BASE_CONFIG.gifts) {
+            config.gifts = BASE_CONFIG.gifts;
+          }
           if (saved.sections && typeof saved.sections.story !== 'undefined') {
             config.sections = saved.sections;
           } else if (BASE_CONFIG.sections) {
@@ -662,10 +668,16 @@ document.addEventListener("DOMContentLoaded", () => {
         </div>
         <p class="mt-3 text-stone-700 text-sm leading-relaxed whitespace-pre-line font-light">${escapeHtml(w.message)}</p>
         <div class="mt-3 pt-2.5 border-t border-stone-100 flex items-center justify-between text-xs text-stone-500">
-          <span class="text-[11px] text-stone-400">Doa restu tulus</span>
-          <button onclick="toggleWishLike('${w.id}')" class="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-stone-50 hover:bg-rose-50 hover:text-rose-600 transition text-stone-600">
+          <div class="flex items-center gap-2">
+            <span class="text-[11px] text-stone-400">Doa restu</span>
+            <button onclick="openEditWishModal('${w.id}')" class="px-2 py-0.5 rounded-md hover:bg-stone-100 text-stone-500 hover:text-stone-800 text-[11px] flex items-center gap-1 transition" title="Perbaiki tulisan jika ada typo">
+              <svg class="w-3 h-3" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+              <span>Edit</span>
+            </button>
+          </div>
+          <button onclick="toggleWishLike('${w.id}', this)" class="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-stone-50 hover:bg-rose-50 hover:text-rose-600 transition text-stone-600 active:scale-125 transform">
             <svg class="w-3.5 h-3.5 fill-current text-rose-500" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
-            <span class="font-medium text-xs">${w.likes || 0}</span>
+            <span class="font-medium text-xs wish-like-count">${w.likes || 0}</span>
           </button>
         </div>
       `;
@@ -673,14 +685,113 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  window.toggleWishLike = function(id) {
+  // Unlimited Likes for Wishes
+  window.toggleWishLike = function(id, btn) {
     const wishes = getStoredWishes();
     const item = wishes.find(w => w.id === id);
     if (item) {
       item.likes = (item.likes || 0) + 1;
       saveWishes(wishes);
+      if (btn) {
+        const countSpan = btn.querySelector(".wish-like-count");
+        if (countSpan) countSpan.textContent = item.likes;
+        btn.classList.add("scale-125");
+        setTimeout(() => btn.classList.remove("scale-125"), 200);
+      }
+      showToast("Terima kasih atas doa & tanda cinta Anda! ❤️");
+    }
+  };
+
+  // Edit Wish Modal Logic (Typo Correction)
+  const editWishModal = document.getElementById("edit-wish-modal");
+
+  window.openEditWishModal = function(id) {
+    const wishes = getStoredWishes();
+    const item = wishes.find(w => w.id === id);
+    if (!item) return;
+
+    const idInput = document.getElementById("edit-wish-id");
+    const nameInput = document.getElementById("edit-wish-name");
+    const attInput = document.getElementById("edit-wish-attendance");
+    const paxInput = document.getElementById("edit-wish-pax");
+    const msgInput = document.getElementById("edit-wish-message");
+
+    if (idInput) idInput.value = item.id;
+    if (nameInput) nameInput.value = item.name || "";
+    if (attInput) attInput.value = item.attendance || "hadir";
+    if (paxInput) paxInput.value = String(item.pax || 1);
+    if (msgInput) msgInput.value = item.message || "";
+
+    if (editWishModal) editWishModal.classList.add("open");
+  };
+
+  window.closeEditWishModal = function() {
+    if (editWishModal) editWishModal.classList.remove("open");
+  };
+
+  window.saveEditedWish = function() {
+    const idInput = document.getElementById("edit-wish-id");
+    const nameInput = document.getElementById("edit-wish-name");
+    const attInput = document.getElementById("edit-wish-attendance");
+    const paxInput = document.getElementById("edit-wish-pax");
+    const msgInput = document.getElementById("edit-wish-message");
+
+    const id = idInput ? idInput.value : "";
+    const name = nameInput ? nameInput.value.trim() : "";
+    const attendance = attInput ? attInput.value : "hadir";
+    const pax = paxInput ? parseInt(paxInput.value) || 1 : 1;
+    const message = msgInput ? msgInput.value.trim() : "";
+
+    if (!name || !message) {
+      showToast("Nama dan isi ucapan wajib diisi.");
+      return;
+    }
+
+    const wishes = getStoredWishes();
+    const item = wishes.find(w => w.id === id);
+    if (item) {
+      item.name = name;
+      item.attendance = attendance;
+      item.pax = pax;
+      item.message = message;
+      saveWishes(wishes);
       renderWishes();
-      showToast("Terima kasih atas tanda cinta Anda!");
+      closeEditWishModal();
+      showToast("Alhamdulillah! Ucapan berhasil diperbaiki. ✨");
+    }
+  };
+
+  // Switch Live Google Maps Location (Akad / Resepsi)
+  window.switchMapLocation = function(type) {
+    const iframe = document.getElementById("google-maps-iframe");
+    const btnResepsi = document.getElementById("map-tab-resepsi");
+    const btnAkad = document.getElementById("map-tab-akad");
+    const titleEl = document.getElementById("map-active-title");
+    const addrEl = document.getElementById("map-active-addr");
+    const dirBtn = document.getElementById("btn-get-directions");
+
+    if (type === "akad") {
+      if (iframe) iframe.src = "https://maps.google.com/maps?q=-7.0490005,107.526473&hl=id&z=16&output=embed";
+      if (btnAkad) {
+        btnAkad.className = "flex-1 py-2 px-3 rounded-xl bg-forest-dark text-[#FFF5D0] shadow-sm flex items-center justify-center gap-1.5 transition";
+      }
+      if (btnResepsi) {
+        btnResepsi.className = "flex-1 py-2 px-3 rounded-xl bg-white text-stone-600 border border-stone-200 hover:bg-stone-100 flex items-center justify-center gap-1.5 transition";
+      }
+      if (titleEl) titleEl.textContent = "Kediaman Mempelai Wanita (Akad Nikah)";
+      if (addrEl) addrEl.textContent = "Kp. Sindangsari RT 01 RW 10 Desa Pananjung, Cangkuang";
+      if (dirBtn) dirBtn.href = "https://www.google.com/maps/dir/?api=1&destination=-7.0490005,107.526473";
+    } else {
+      if (iframe) iframe.src = "https://maps.google.com/maps?q=-7.051779,107.526431&hl=id&z=16&output=embed";
+      if (btnResepsi) {
+        btnResepsi.className = "flex-1 py-2 px-3 rounded-xl bg-forest-dark text-[#FFF5D0] shadow-sm flex items-center justify-center gap-1.5 transition";
+      }
+      if (btnAkad) {
+        btnAkad.className = "flex-1 py-2 px-3 rounded-xl bg-white text-stone-600 border border-stone-200 hover:bg-stone-100 flex items-center justify-center gap-1.5 transition";
+      }
+      if (titleEl) titleEl.textContent = "Kediaman Mempelai Pria (Resepsi)";
+      if (addrEl) addrEl.textContent = "Kp. Haur Duni RT 03 RW 10 Desa Pananjung, Cangkuang";
+      if (dirBtn) dirBtn.href = "https://www.google.com/maps/dir/?api=1&destination=-7.051779,107.526431";
     }
   };
 
