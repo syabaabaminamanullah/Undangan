@@ -392,12 +392,14 @@ body {
   -webkit-backdrop-filter: blur(16px);
   border: 1px solid rgba(212, 175, 55, 0.3);
   border-radius: 9999px;
-  padding: 0.35rem 0.75rem;
+  padding: 0.35rem 0.5rem;
   display: flex;
   align-items: center;
-  gap: 0.35rem;
+  justify-content: center;
+  gap: 0;
   box-shadow: 0 15px 35px -5px rgba(0, 0, 0, 0.4), 0 0 20px rgba(212, 175, 55, 0.15);
-  max-width: 95vw;
+  width: max-content;
+  max-width: calc(100vw - 1.5rem);
 }
 
 .dock-item {
@@ -405,21 +407,33 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 0.4rem 0.65rem;
+  padding: 0.35rem 0.55rem;
   border-radius: 9999px;
   color: #B5C4B7;
-  font-size: 0.68rem;
+  font-size: 0.6rem;
   font-weight: 500;
   text-decoration: none;
   transition: all 0.25s ease;
   white-space: nowrap;
+  flex-shrink: 0;
 }
 
 .dock-item svg {
-  width: 17px;
-  height: 17px;
+  width: 15px;
+  height: 15px;
   margin-bottom: 2px;
   transition: transform 0.2s ease;
+}
+
+@media (max-width: 370px) {
+  .dock-item {
+    padding: 0.3rem 0.4rem;
+    font-size: 0.55rem;
+  }
+  .dock-item svg {
+    width: 14px;
+    height: 14px;
+  }
 }
 
 .dock-item:hover,
