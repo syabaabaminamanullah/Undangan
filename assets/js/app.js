@@ -27,6 +27,11 @@ document.addEventListener("DOMContentLoaded", () => {
         if (BASE_CONFIG) {
           config.couple.groom.avatar = BASE_CONFIG.couple.groom.avatar;
           config.couple.bride.avatar = BASE_CONFIG.couple.bride.avatar;
+          // Always use base config for IG links (real accounts)
+          config.couple.groom.instagram = BASE_CONFIG.couple.groom.instagram;
+          config.couple.groom.instagramHandle = BASE_CONFIG.couple.groom.instagramHandle;
+          config.couple.bride.instagram = BASE_CONFIG.couple.bride.instagram;
+          config.couple.bride.instagramHandle = BASE_CONFIG.couple.bride.instagramHandle;
           config.gallery = BASE_CONFIG.gallery;
           config.meta.ogImage = BASE_CONFIG.meta.ogImage;
           if (BASE_CONFIG.music && BASE_CONFIG.music.popularWeddingSongs) {
@@ -82,8 +87,11 @@ document.addEventListener("DOMContentLoaded", () => {
     }
     if (groomBio) groomBio.textContent = `"${config.couple.groom.bio}"`;
     if (groomIg) {
-      groomIg.textContent = config.couple.groom.instagramHandle || "@aryapratama";
-      groomIg.parentElement.href = `https://instagram.com/${(config.couple.groom.instagramHandle || '').replace('@', '')}`;
+      groomIg.textContent = config.couple.groom.instagramHandle || "@abud_doclo";
+      // Use full instagram URL if available, else build from handle
+      const groomIgUrl = config.couple.groom.instagram
+        || `https://instagram.com/${(config.couple.groom.instagramHandle || 'abud_doclo').replace('@', '')}`;
+      groomIg.parentElement.href = groomIgUrl;
     }
     if (groomAvatar && config.couple.groom.avatar) groomAvatar.src = config.couple.groom.avatar;
 
@@ -99,8 +107,11 @@ document.addEventListener("DOMContentLoaded", () => {
     }
     if (brideBio) brideBio.textContent = `"${config.couple.bride.bio}"`;
     if (brideIg) {
-      brideIg.textContent = config.couple.bride.instagramHandle || "@aninditalarasati";
-      brideIg.parentElement.href = `https://instagram.com/${(config.couple.bride.instagramHandle || '').replace('@', '')}`;
+      brideIg.textContent = config.couple.bride.instagramHandle || "@intansyintiaintansyintia";
+      // Use full instagram URL if available, else build from handle
+      const brideIgUrl = config.couple.bride.instagram
+        || `https://instagram.com/${(config.couple.bride.instagramHandle || 'intansyintiaintansyintia').replace('@', '')}`;
+      brideIg.parentElement.href = brideIgUrl;
     }
     if (brideAvatar && config.couple.bride.avatar) brideAvatar.src = config.couple.bride.avatar;
 
@@ -179,12 +190,25 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Audio src
     const audioEl = document.getElementById("bg-music");
-    if (audioEl && config.music.url) {
+    if (audioEl && config.music && config.music.url) {
       const sourceEl = audioEl.querySelector("source");
-      if (sourceEl && sourceEl.src !== config.music.url) {
+      if (sourceEl && !sourceEl.src.includes(config.music.url)) {
         sourceEl.src = config.music.url;
         audioEl.load();
       }
+    }
+
+    // Gallery images sync
+    if (config.gallery && config.gallery.length > 0) {
+      const galleryItems = document.querySelectorAll(".gallery-grid .gallery-item");
+      galleryItems.forEach((itemEl, idx) => {
+        if (config.gallery[idx]) {
+          const imgEl = itemEl.querySelector("img");
+          const captionEl = itemEl.querySelector(".gallery-overlay p");
+          if (imgEl) imgEl.src = config.gallery[idx].url;
+          if (captionEl) captionEl.textContent = config.gallery[idx].caption;
+        }
+      });
     }
 
     // Video Teaser
@@ -418,7 +442,11 @@ document.addEventListener("DOMContentLoaded", () => {
   function renderMusicPlaylistModal() {
     const listEl = document.getElementById("music-playlist-modal-list");
     if (!listEl) return;
-    const songs = (config.music && config.music.popularWeddingSongs) ? config.music.popularWeddingSongs : [];
+    const songs = (config.music && config.music.popularWeddingSongs && config.music.popularWeddingSongs.length > 0)
+      ? config.music.popularWeddingSongs
+      : ((window.WEDDING_CONFIG && window.WEDDING_CONFIG.music && window.WEDDING_CONFIG.music.popularWeddingSongs)
+        ? window.WEDDING_CONFIG.music.popularWeddingSongs
+        : []);
     if (songs.length === 0) {
       listEl.innerHTML = `<p class="text-center text-stone-400 py-4 text-sm italic">Belum ada lagu dalam daftar putar.</p>`;
       return;
