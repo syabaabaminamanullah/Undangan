@@ -295,7 +295,7 @@ const WEDDING_CONFIG = {
     "Bpk. Dargo & Ibu Nin Karwati",
     "Bpk. Eman & Ibu Acah",
     "Bpk. Alex & Ibu Herni Nuraeni",
-    "Bpk. M. Muhsinul & Ibu Tarmilah",
+    "Bpk. M. Muhsinul & Hj. Tarmilah",
     "Bpk. Yahya & Ibu Popon"
   ],
 
