@@ -64,12 +64,10 @@ document.addEventListener("DOMContentLoaded", () => {
     config = BASE_CONFIG;
   }
 
-  // Always ensure popularWeddingSongs is available (fallback to base)
+  // Always ensure popularWeddingSongs is synced to authentic songs from config.js
   if (BASE_CONFIG && BASE_CONFIG.music && BASE_CONFIG.music.popularWeddingSongs) {
     if (!config.music) config.music = BASE_CONFIG.music;
-    if (!config.music.popularWeddingSongs) {
-      config.music.popularWeddingSongs = BASE_CONFIG.music.popularWeddingSongs;
-    }
+    config.music.popularWeddingSongs = BASE_CONFIG.music.popularWeddingSongs;
   }
 
   if (!config) {

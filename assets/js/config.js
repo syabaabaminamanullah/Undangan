@@ -246,46 +246,6 @@ const WEDDING_CONFIG = {
         tag: "Romantic Serenade",
         desc: "Alunan dawai biola yang tenang, damai, dan penuh kehangatan cinta yang abadi.",
         url: "assets/audio/air-on-g.mp3"
-      },
-      {
-        id: "s4",
-        title: "Until I Found You",
-        artist: "Stephen Sanchez",
-        tag: "Modern Romance / Populer 2024-2026",
-        desc: "Lagu romantis bernuansa retro-klasik yang sangat digemari pasangan pengantin modern.",
-        url: "assets/audio/canon-in-d.mp3"
-      },
-      {
-        id: "s5",
-        title: "Beautiful in White",
-        artist: "Shane Filan (Westlife)",
-        tag: "Wedding Classic Anthem",
-        desc: "Lagu wajib saat gaun pengantin mempelai wanita melangkah anggun menuju pelaminan.",
-        url: "assets/audio/wedding-march.mp3"
-      },
-      {
-        id: "s6",
-        title: "A Thousand Years",
-        artist: "Christina Perri",
-        tag: "Sacred Eternal Vow",
-        desc: "Janji cinta abadi yang telah menanti seribu tahun dan akan mencintai seribu tahun lagi.",
-        url: "assets/audio/air-on-g.mp3"
-      },
-      {
-        id: "s7",
-        title: "Can't Help Falling in Love",
-        artist: "Elvis Presley / Kina Grannis",
-        tag: "All-Time Greatest Love Song",
-        desc: "Melodi sakral yang melambangkan kepasrahan hati yang tulus dan ikhlas mencintai.",
-        url: "assets/audio/canon-in-d.mp3"
-      },
-      {
-        id: "s8",
-        title: "Perfect",
-        artist: "Ed Sheeran",
-        tag: "First Dance Anthem",
-        desc: "Lagu dansa pernikahan terpopuler di dunia yang melukiskan cinta sejati yang sempurna apa adanya.",
-        url: "assets/audio/wedding-march.mp3"
       }
     ]
   },
