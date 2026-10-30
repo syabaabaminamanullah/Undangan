@@ -621,6 +621,24 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
+  function getMyOwnWishes() {
+    try {
+      return JSON.parse(localStorage.getItem("wedding_my_own_wishes") || "[]");
+    } catch (e) {
+      return [];
+    }
+  }
+
+  function addMyOwnWish(id) {
+    try {
+      const list = getMyOwnWishes();
+      if (!list.includes(id)) {
+        list.push(id);
+        localStorage.setItem("wedding_my_own_wishes", JSON.stringify(list));
+      }
+    } catch (e) {}
+  }
+
   function renderWishes(filter = "all") {
     const listEl = document.getElementById("wishes-list");
     const countEl = document.getElementById("wishes-count");
@@ -628,6 +646,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const allWishes = getStoredWishes();
     const myLikedList = getLikedWishesList();
+    const myOwnList = getMyOwnWishes();
 
     const filtered = allWishes.filter(w => {
       if (filter === "hadir") return w.attendance === "hadir";
@@ -660,6 +679,7 @@ document.addEventListener("DOMContentLoaded", () => {
       }
 
       const isLiked = myLikedList.includes(w.id);
+      const isMyOwn = myOwnList.includes(w.id);
 
       const card = document.createElement("div");
       card.className = "p-4 rounded-2xl bg-white/70 border border-stone-200/80 shadow-sm transition hover:shadow-md";
@@ -682,10 +702,12 @@ document.addEventListener("DOMContentLoaded", () => {
         <div class="mt-3 pt-2.5 border-t border-stone-100 flex items-center justify-between text-xs text-stone-500">
           <div class="flex items-center gap-2">
             <span class="text-[11px] text-stone-400">Doa restu</span>
-            <button onclick="openEditWishModal('${w.id}')" class="px-2 py-0.5 rounded-md hover:bg-stone-100 text-stone-500 hover:text-stone-800 text-[11px] flex items-center gap-1 transition" title="Perbaiki tulisan jika ada typo">
-              <svg class="w-3 h-3" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
-              <span>Edit</span>
-            </button>
+            ${isMyOwn ? `
+              <button onclick="openEditWishModal('${w.id}')" class="px-2 py-0.5 rounded-md hover:bg-stone-100 text-stone-500 hover:text-stone-800 text-[11px] flex items-center gap-1 transition" title="Perbaiki tulisan Anda jika ada typo">
+                <svg class="w-3 h-3" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+                <span>Edit</span>
+              </button>
+            ` : ''}
           </div>
           <button onclick="toggleWishLike('${w.id}', this)" class="flex items-center gap-1.5 px-2.5 py-1 rounded-full border transition active:scale-110 transform ${isLiked ? 'bg-rose-50 border-rose-200 text-rose-600 font-bold' : 'bg-stone-50 border-stone-200 hover:bg-rose-50 hover:text-rose-600 text-stone-600'}" title="${isLiked ? 'Batalkan tanda cinta' : 'Beri 1 tanda cinta'}">
             <svg class="w-3.5 h-3.5 ${isLiked ? 'fill-rose-500 text-rose-500' : 'fill-none stroke-current'}" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
@@ -723,10 +745,16 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   };
 
-  // Edit Wish Modal Logic (Typo Correction)
+  // Edit Wish Modal Logic (Typo Correction) - Only author can edit
   const editWishModal = document.getElementById("edit-wish-modal");
 
   window.openEditWishModal = function(id) {
+    const myOwnList = getMyOwnWishes();
+    if (!myOwnList.includes(id)) {
+      showToast("Hanya pengirim yang dapat mengedit ucapan ini.");
+      return;
+    }
+
     const wishes = getStoredWishes();
     const item = wishes.find(w => w.id === id);
     if (!item) return;
@@ -762,6 +790,12 @@ document.addEventListener("DOMContentLoaded", () => {
     const attendance = attInput ? attInput.value : "hadir";
     const pax = paxInput ? parseInt(paxInput.value) || 1 : 1;
     const message = msgInput ? msgInput.value.trim() : "";
+
+    const myOwnList = getMyOwnWishes();
+    if (!myOwnList.includes(id)) {
+      showToast("Akses ditolak: hanya pembuat ucapan yang dapat mengedit.");
+      return;
+    }
 
     if (!name || !message) {
       showToast("Nama dan isi ucapan wajib diisi.");
@@ -853,6 +887,16 @@ document.addEventListener("DOMContentLoaded", () => {
         message: messageInput.value.trim(),
         likes: 1
       };
+
+      // Catat bahwa perangkat ini adalah pemilik/pembuat ucapan ini (sehingga bisa diedit jika typo)
+      addMyOwnWish(newWish.id);
+
+      // Tandai juga sudah diberi like awal oleh pengirimnya sendiri
+      const myLiked = getLikedWishesList();
+      if (!myLiked.includes(newWish.id)) {
+        myLiked.push(newWish.id);
+        localStorage.setItem("wedding_user_liked_wishes", JSON.stringify(myLiked));
+      }
 
       const wishes = getStoredWishes();
       wishes.unshift(newWish);
