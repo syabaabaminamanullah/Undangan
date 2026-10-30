@@ -83,7 +83,11 @@
       </button>
       <button onclick="switchTab('tab-tamu')" class="tab-btn px-4 py-2.5 rounded-xl font-medium text-xs sm:text-sm flex items-center gap-2 bg-white border border-stone-200 text-stone-600 hover:bg-stone-50 transition">
         <i data-lucide="message-square" class="w-4 h-4 text-emerald-600"></i>
-        <span>Generator Link Tamu &amp; WhatsApp</span>
+        <span>Generator Link Tamu</span>
+      </button>
+      <button onclick="switchTab('tab-ucapan')" class="tab-btn px-4 py-2.5 rounded-xl font-medium text-xs sm:text-sm flex items-center gap-2 bg-white border border-stone-200 text-stone-600 hover:bg-stone-50 transition">
+        <i data-lucide="heart-handshake" class="w-4 h-4 text-rose-600"></i>
+        <span>Kelola Ucapan &amp; Doa</span>
       </button>
       <button onclick="switchTab('tab-export')" class="tab-btn px-4 py-2.5 rounded-xl font-medium text-xs sm:text-sm flex items-center gap-2 bg-white border border-stone-200 text-stone-600 hover:bg-stone-50 transition">
         <i data-lucide="download" class="w-4 h-4 text-amber-600"></i>
@@ -464,6 +468,91 @@
       </div>
     </div>
 
+    <!-- ==========================================
+         TAB 6: KELOLA UCAPAN & BUKU TAMU
+         ========================================== -->
+    <div id="tab-ucapan" class="tab-content hidden space-y-6">
+      <div class="bg-white rounded-2xl p-6 sm:p-8 border border-stone-200 shadow-sm">
+        
+        <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 border-b border-stone-200 pb-5 mb-6">
+          <div>
+            <h2 class="text-lg font-bold text-stone-900 flex items-center gap-2">
+              <i data-lucide="heart-handshake" class="w-5 h-5 text-rose-600"></i>
+              <span>Daftar Ucapan &amp; Konfirmasi Kehadiran Tamu</span>
+            </h2>
+            <p class="text-xs text-stone-500 mt-1">Kelola ucapan doa yang dikirim tamu undangan dan pantau konfirmasi kehadiran.</p>
+          </div>
+          <div class="flex items-center gap-2">
+            <button onclick="resetWishesAdmin()" class="px-3 py-2 rounded-xl border border-stone-200 hover:bg-stone-50 text-stone-600 text-xs font-medium flex items-center gap-1.5 transition">
+              <i data-lucide="rotate-ccw" class="w-3.5 h-3.5"></i>
+              <span>Reset Ucapan</span>
+            </button>
+            <button onclick="toggleAddWishModal()" class="px-4 py-2 rounded-xl bg-emerald-800 hover:bg-emerald-700 text-white text-xs font-semibold flex items-center gap-1.5 shadow-sm transition">
+              <i data-lucide="plus" class="w-3.5 h-3.5"></i>
+              <span>Tambah Ucapan Manual</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- STATS CARDS -->
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-6">
+          <div class="bg-stone-50 p-4 rounded-xl border border-stone-200 text-center">
+            <span class="text-xs text-stone-500 font-medium">Total Ucapan</span>
+            <p id="stat-total-wishes" class="text-2xl font-bold text-stone-900 mt-0.5">0</p>
+          </div>
+          <div class="bg-emerald-50 p-4 rounded-xl border border-emerald-200 text-center">
+            <span class="text-xs text-emerald-700 font-medium">Hadir</span>
+            <p id="stat-hadir-wishes" class="text-2xl font-bold text-emerald-800 mt-0.5">0</p>
+          </div>
+          <div class="bg-amber-50 p-4 rounded-xl border border-amber-200 text-center">
+            <span class="text-xs text-amber-700 font-medium">Masih Ragu</span>
+            <p id="stat-ragu-wishes" class="text-2xl font-bold text-amber-800 mt-0.5">0</p>
+          </div>
+          <div class="bg-rose-50 p-4 rounded-xl border border-rose-200 text-center">
+            <span class="text-xs text-rose-700 font-medium">Berhalangan</span>
+            <p id="stat-tidak-wishes" class="text-2xl font-bold text-rose-800 mt-0.5">0</p>
+          </div>
+        </div>
+
+        <!-- ADD WISH FORM (COLLAPSIBLE) -->
+        <div id="add-wish-box" class="hidden mb-6 p-4 rounded-xl bg-stone-50 border border-stone-200">
+          <h3 class="font-bold text-xs text-stone-800 uppercase tracking-wider mb-3">Tambah Ucapan Baru Secara Manual</h3>
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-3">
+            <div>
+              <label class="block text-[11px] text-stone-600 mb-1">Nama Tamu</label>
+              <input type="text" id="manual-wish-name" placeholder="Misal: Bpk. Rahmat &amp; Keluarga" class="w-full px-3 py-2 text-xs rounded-lg border border-stone-300">
+            </div>
+            <div>
+              <label class="block text-[11px] text-stone-600 mb-1">Status Kehadiran</label>
+              <select id="manual-wish-attendance" class="w-full px-3 py-2 text-xs rounded-lg border border-stone-300">
+                <option value="hadir">Hadir</option>
+                <option value="ragu">Masih Ragu</option>
+                <option value="tidak">Tidak Hadir</option>
+              </select>
+            </div>
+            <div>
+              <label class="block text-[11px] text-stone-600 mb-1">Jumlah Orang (Pax)</label>
+              <input type="number" id="manual-wish-pax" value="2" min="1" max="10" class="w-full px-3 py-2 text-xs rounded-lg border border-stone-300">
+            </div>
+          </div>
+          <div class="mb-3">
+            <label class="block text-[11px] text-stone-600 mb-1">Pesan Doa &amp; Ucapan</label>
+            <textarea id="manual-wish-message" rows="2" placeholder="Tuliskan ucapan selamat dan doa..." class="w-full px-3 py-2 text-xs rounded-lg border border-stone-300"></textarea>
+          </div>
+          <div class="flex justify-end gap-2">
+            <button onclick="toggleAddWishModal()" class="px-3 py-1.5 rounded-lg text-xs text-stone-500 hover:bg-stone-200">Batal</button>
+            <button onclick="submitManualWish()" class="px-4 py-1.5 rounded-lg text-xs bg-emerald-800 hover:bg-emerald-700 text-white font-semibold">Simpan Ucapan</button>
+          </div>
+        </div>
+
+        <!-- LIST CONTAINER -->
+        <div id="admin-wishes-list" class="space-y-3">
+          <!-- Dynamically populated -->
+        </div>
+
+      </div>
+    </div>
+
   </main>
 
   <footer class="bg-white border-t border-stone-200 py-4 text-center text-xs text-stone-400">
@@ -803,9 +892,159 @@ window.WEDDING_CONFIG = WEDDING_CONFIG;
       }
     }
 
+    // WISHES (BUKU TAMU) MANAGEMENT
+    const WISHES_STORAGE_KEY = "wedding_wishes_abud_intan";
+
+    function getAdminWishes() {
+      let raw = localStorage.getItem(WISHES_STORAGE_KEY);
+      if (!raw) {
+        raw = localStorage.getItem("wedding_wishes_arya_anin");
+      }
+      if (raw) {
+        try {
+          return JSON.parse(raw);
+        } catch (e) {}
+      }
+      const initial = (window.WEDDING_CONFIG && window.WEDDING_CONFIG.initialWishes) ? window.WEDDING_CONFIG.initialWishes : [];
+      localStorage.setItem(WISHES_STORAGE_KEY, JSON.stringify(initial));
+      return initial;
+    }
+
+    function saveAdminWishes(wishes) {
+      localStorage.setItem(WISHES_STORAGE_KEY, JSON.stringify(wishes));
+      renderAdminWishes();
+    }
+
+    function renderAdminWishes() {
+      const container = document.getElementById('admin-wishes-list');
+      if (!container) return;
+
+      const wishes = getAdminWishes();
+
+      // Stats
+      const total = wishes.length;
+      const hadir = wishes.filter(w => w.attendance === 'hadir').length;
+      const ragu = wishes.filter(w => w.attendance === 'ragu').length;
+      const tidak = wishes.filter(w => w.attendance === 'tidak').length;
+
+      const statTotal = document.getElementById('stat-total-wishes');
+      const statHadir = document.getElementById('stat-hadir-wishes');
+      const statRagu = document.getElementById('stat-ragu-wishes');
+      const statTidak = document.getElementById('stat-tidak-wishes');
+
+      if (statTotal) statTotal.textContent = total;
+      if (statHadir) statHadir.textContent = hadir;
+      if (statRagu) statRagu.textContent = ragu;
+      if (statTidak) statTidak.textContent = tidak;
+
+      if (wishes.length === 0) {
+        container.innerHTML = `
+          <div class="text-center py-12 text-stone-400 bg-stone-50 rounded-xl border border-dashed border-stone-200">
+            <i data-lucide="inbox" class="w-8 h-8 mx-auto mb-2 opacity-50"></i>
+            <p class="text-sm font-medium">Belum ada ucapan yang tersimpan.</p>
+          </div>
+        `;
+        lucide.createIcons();
+        return;
+      }
+
+      container.innerHTML = wishes.map((w, idx) => {
+        let badgeColor = "bg-emerald-100 text-emerald-800 border-emerald-300";
+        let badgeLabel = "Hadir";
+        if (w.attendance === "ragu") {
+          badgeColor = "bg-amber-100 text-amber-800 border-amber-300";
+          badgeLabel = "Masih Ragu";
+        } else if (w.attendance === "tidak") {
+          badgeColor = "bg-rose-100 text-rose-800 border-rose-300";
+          badgeLabel = "Tidak Hadir";
+        }
+
+        return `
+          <div class="p-4 rounded-xl border border-stone-200 bg-stone-50/60 hover:bg-stone-50 transition flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+            <div class="flex-1">
+              <div class="flex items-center gap-2 flex-wrap mb-1">
+                <span class="font-bold text-stone-900 text-sm">${escapeHtmlAdmin(w.name)}</span>
+                <span class="text-[10px] font-semibold px-2 py-0.5 rounded-full border ${badgeColor}">
+                  ${badgeLabel} (${w.pax || 1} orang)
+                </span>
+                <span class="text-[11px] text-stone-400">• ${w.time || 'Baru saja'}</span>
+              </div>
+              <p class="text-xs text-stone-600 leading-relaxed font-light italic">"${escapeHtmlAdmin(w.message)}"</p>
+            </div>
+            <button onclick="deleteWishAdmin(${idx})" class="self-end sm:self-center px-3 py-1.5 rounded-lg border border-rose-200 text-rose-600 hover:bg-rose-50 text-xs font-medium flex items-center gap-1 transition">
+              <i data-lucide="trash-2" class="w-3.5 h-3.5"></i>
+              <span>Hapus</span>
+            </button>
+          </div>
+        `;
+      }).join("");
+
+      lucide.createIcons();
+    }
+
+    function deleteWishAdmin(index) {
+      const wishes = getAdminWishes();
+      const target = wishes[index];
+      if (!target) return;
+      if (confirm(`Hapus ucapan dari "${target.name}"?`)) {
+        wishes.splice(index, 1);
+        saveAdminWishes(wishes);
+        showAdminToast("Ucapan berhasil dihapus.");
+      }
+    }
+
+    function toggleAddWishModal() {
+      const box = document.getElementById('add-wish-box');
+      if (box) box.classList.toggle('hidden');
+    }
+
+    function submitManualWish() {
+      const name = document.getElementById('manual-wish-name').value.trim();
+      const attendance = document.getElementById('manual-wish-attendance').value;
+      const pax = parseInt(document.getElementById('manual-wish-pax').value) || 1;
+      const message = document.getElementById('manual-wish-message').value.trim();
+
+      if (!name || !message) {
+        alert("Nama dan pesan ucapan wajib diisi.");
+        return;
+      }
+
+      const wishes = getAdminWishes();
+      wishes.unshift({
+        id: "w_" + Date.now(),
+        name: name,
+        attendance: attendance,
+        pax: pax,
+        time: "Baru saja",
+        message: message,
+        likes: 0
+      });
+
+      saveAdminWishes(wishes);
+      document.getElementById('manual-wish-name').value = "";
+      document.getElementById('manual-wish-message').value = "";
+      toggleAddWishModal();
+      showAdminToast("Ucapan baru berhasil ditambahkan!");
+    }
+
+    function resetWishesAdmin() {
+      if (confirm("Kembalikan daftar ucapan ke ucapan awal bawaan?")) {
+        const initial = (window.WEDDING_CONFIG && window.WEDDING_CONFIG.initialWishes) ? window.WEDDING_CONFIG.initialWishes : [];
+        saveAdminWishes(initial);
+        showAdminToast("Daftar ucapan berhasil di-reset.");
+      }
+    }
+
+    function escapeHtmlAdmin(str) {
+      const div = document.createElement('div');
+      div.innerText = str || "";
+      return div.innerHTML;
+    }
+
     // Init
     loadConfigIntoForm();
     renderPopularSongs();
+    renderAdminWishes();
     lucide.createIcons();
   </script>
 </body>

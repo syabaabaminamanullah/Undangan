@@ -443,6 +443,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // 10b. Music Playlist Modal
   const musicModal = document.getElementById("music-modal");
+  let activeSongTitle = (config.music && config.music.title) ? config.music.title : "Canon in D";
 
   function renderMusicPlaylistModal() {
     const listEl = document.getElementById("music-playlist-modal-list");
@@ -457,11 +458,8 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
 
-    // Detect currently active song URL
-    const currentSrc = audioEl ? (audioEl.currentSrc || audioEl.src || "") : "";
-
     listEl.innerHTML = songs.map((song, idx) => {
-      const isActive = currentSrc && currentSrc.includes(song.url.split("/").pop().split("?")[0]);
+      const isActive = (activeSongTitle === song.title);
       return `
         <div class="flex items-center gap-3 px-4 py-3 rounded-xl border cursor-pointer group transition
           ${isActive
@@ -478,7 +476,7 @@ document.addEventListener("DOMContentLoaded", () => {
             <p class="text-sm font-semibold text-stone-800 truncate ${isActive ? 'text-forest-dark' : ''}">${escapeHtml(song.title)}</p>
             <p class="text-xs text-stone-500 truncate">${escapeHtml(song.artist)}</p>
           </div>
-          <span class="text-[10px] text-gold/70 font-medium tracking-wide flex-shrink-0 ${isActive ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'} transition">
+          <span class="text-[10px] text-gold/70 font-medium tracking-wide flex-shrink-0 ${isActive ? 'opacity-100 font-bold' : 'opacity-0 group-hover:opacity-100'} transition">
             ${isActive ? '♪ Playing' : 'Putar'}
           </span>
         </div>
@@ -499,6 +497,7 @@ document.addEventListener("DOMContentLoaded", () => {
   };
 
   window.switchTrack = function(url, title, artist) {
+    activeSongTitle = title;
     if (!audioEl) return;
     audioEl.src = url;
     audioEl.load();
@@ -570,10 +569,13 @@ document.addEventListener("DOMContentLoaded", () => {
   };
 
   // 12. RSVP & Guestbook wishes with LocalStorage persistence
-  const STORAGE_KEY = "wedding_wishes_arya_anin";
+  const STORAGE_KEY = "wedding_wishes_abud_intan";
 
   function getStoredWishes() {
-    const local = localStorage.getItem(STORAGE_KEY);
+    let local = localStorage.getItem(STORAGE_KEY);
+    if (!local) {
+      local = localStorage.getItem("wedding_wishes_arya_anin");
+    }
     if (local) {
       try {
         return JSON.parse(local);
