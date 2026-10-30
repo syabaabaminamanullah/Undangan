@@ -10,7 +10,7 @@ const WEDDING_CONFIG = {
     title: "The Wedding of Abud & Intan | Undangan Pernikahan",
     description: "Dengan memohon rahmat dan ridho Allah SWT, kami mengundang Anda dalam pernikahan Abdullah Nur Cahya (Abud) & Intan Syintia Nurrannisa (Intan).",
     canonicalUrl: "https://undangan-six-flax.vercel.app",
-    ogImage: "https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1200&q=80"
+    ogImage: "assets/images/foto-berdua.png"
   },
 
   // Info Pasangan Mempelai
@@ -25,7 +25,7 @@ const WEDDING_CONFIG = {
       childOrder: "Putra kedua dari",
       instagram: "https://www.instagram.com/abud_doclo",
       instagramHandle: "@abud_doclo",
-      avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=800&q=80",
+      avatar: "assets/images/foto-abud.png",
       bio: "Menemukan pelabuhan cinta dan ketenangan hati bersama Intan, melangkah bersama dalam ridho Ilahi."
     },
     bride: {
@@ -36,7 +36,7 @@ const WEDDING_CONFIG = {
       childOrder: "Putri pertama dari",
       instagram: "https://www.instagram.com/intansyintiaintansyintia",
       instagramHandle: "@intansyintiaintansyintia",
-      avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=800&q=80",
+      avatar: "assets/images/foto-intan.png",
       bio: "Merajut rasa dan asa bersama Abud menuju bahtera rumah tangga yang sakinah, mawaddah, warahmah."
     }
   },
@@ -126,24 +126,24 @@ const WEDDING_CONFIG = {
   // Galeri Foto & Prewedding (Bisa diisi link foto Anda)
   gallery: [
     {
-      url: "https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1000&q=80",
-      caption: "Di Bawah Kanopi Alam",
-      category: "nature"
+      url: "assets/images/foto-berdua.png",
+      caption: "Abud & Intan — Momen Bersama",
+      category: "couple"
     },
     {
-      url: "https://images.unsplash.com/photo-1583939003579-730e3918a45a?auto=format&fit=crop&w=1000&q=80",
-      caption: "Genggaman Menuju Masa Depan",
-      category: "intimate"
+      url: "assets/images/foto-abud.png",
+      caption: "Abdullah Nur Cahya (Abud)",
+      category: "portrait"
     },
     {
-      url: "https://images.unsplash.com/photo-1606800052052-a08af7148866?auto=format&fit=crop&w=1000&q=80",
-      caption: "Cahaya Senja & Senyuman Tulus",
-      category: "nature"
+      url: "assets/images/foto-intan.png",
+      caption: "Intan Syintia Nurrannisa (Intan)",
+      category: "portrait"
     },
     {
       url: "https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=1000&q=80",
       caption: "Menatap Hari Bahagia",
-      category: "portrait"
+      category: "nature"
     },
     {
       url: "https://images.unsplash.com/photo-1544077960-604201fe74bc?auto=format&fit=crop&w=1000&q=80",
@@ -163,7 +163,7 @@ const WEDDING_CONFIG = {
     title: "Cinematic Prewedding Film",
     subtitle: "A glimpse of our sacred journey",
     youtubeId: "LXb3EKWsInQ",
-    poster: "https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1200&q=80"
+    poster: "assets/images/foto-berdua.png"
   },
 
   // Dress Code Panduan Pakaian
