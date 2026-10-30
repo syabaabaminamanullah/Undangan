@@ -130,37 +130,37 @@ const WEDDING_CONFIG = {
     }
   ],
 
-  // Galeri Foto & Prewedding (Bisa diisi link foto Anda)
+  // Galeri Foto & Prewedding
   gallery: [
     {
-      url: "assets/images/foto-berdua.png",
-      caption: "Abud & Intan — Momen Bersama",
+      url: "assets/images/foto-galeri-1.png",
+      caption: "Abud & Intan — Janji Suci Pernikahan",
       category: "couple"
+    },
+    {
+      url: "assets/images/foto-galeri-3.png",
+      caption: "Abud & Intan — Senyuman Menuju Bahagia",
+      category: "couple"
+    },
+    {
+      url: "assets/images/foto-galeri-2.png",
+      caption: "Abud & Intan — Keanggunan Busana Tradisional",
+      category: "couple"
+    },
+    {
+      url: "assets/images/foto-berdua.png",
+      caption: "Abud & Intan — Harmoni Kasih Bersama",
+      category: "couple"
+    },
+    {
+      url: "assets/images/foto-intan.png",
+      caption: "Intan Syintia Nurrannisa (Intan)",
+      category: "portrait"
     },
     {
       url: "assets/images/foto-abud.png",
       caption: "Abdullah Nur Cahya (Abud)",
       category: "portrait"
-    },
-    {
-      url: "assets/images/foto-intan-latar-biru.jpeg",
-      caption: "Intan Syintia Nurrannisa (Intan)",
-      category: "portrait"
-    },
-    {
-      url: "https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=1000&q=80",
-      caption: "Menatap Hari Bahagia",
-      category: "nature"
-    },
-    {
-      url: "https://images.unsplash.com/photo-1544077960-604201fe74bc?auto=format&fit=crop&w=1000&q=80",
-      caption: "Keabadian dalam Setiap Detik",
-      category: "portrait"
-    },
-    {
-      url: "https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?auto=format&fit=crop&w=1000&q=80",
-      caption: "Dua Jiwa, Satu Tujuan",
-      category: "intimate"
     }
   ],
 
